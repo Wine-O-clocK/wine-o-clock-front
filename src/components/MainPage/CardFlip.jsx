@@ -2,43 +2,79 @@ import React from 'react'
 import styled from 'styled-components';
 import Flippy, { FrontSide, BackSide } from 'react-flippy';
 
-function CardFlip({wine}) {
+function CardFlip({ wine }) {
+  const wineInfo = {
+    wineImage: wine[0],
+    wineName: wine[1],
+    wineNameEng: wine[2],
+    wineType: wine[3],
+    wineVariety: wine[8]
+  }
+
   return (
     <CardWrap>
-     <Flippy
+      <Flippy
         flipOnHover={false}
         flipOnClick={true}
         flipDirection="horizontal"
-        style={{width: "200px"}}
+        className="flip"
       >
-        <FrontSide>
+        <FrontWrap>
           <div className='card'>
-            <img src={wine[0]}/>
-            <span className='wineName'>{wine[1]}</span>
-          </div> 
-        </FrontSide>
-        <BackSide>
-          <div className='card'>
-            <span className='wineName'>
-              {wine[1]}
-            </span>
+            <img src={wineInfo.wineImage} />
+            <span className='wineName'>{wineInfo.wineName}</span>
           </div>
-        </BackSide>
+        </FrontWrap>
+        <BackWrap>
+          <div className='card'>
+            <div className='wineInfo'>
+              <span>{wineInfo.wineName}</span>
+              <span>{wineInfo.wineNameEng}</span>
+              <span>{wineInfo.wineType}</span>
+              <span>{wineInfo.wineVariety}</span>
+            </div>
+          </div>
+        </BackWrap>
       </Flippy>
     </CardWrap>
-
   )
 }
 
 export default CardFlip;
 
 const CardWrap = styled.div`
-  .card {
-    display: flex;
-
-    flex-direction: column;
-    text-align: center;
-    cursor: pointer;
+  img {
+    height: auto;
   }
+  .flippy-container {
+    margin: 0 10px;
+    border: 1px solid gray;
+  }
+  .card {
+    text-align: center;
+  }
+`
 
+const FrontWrap = styled(FrontSide)`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  width: 100%;
+
+  .wineName {
+    font-weight: bold;
+    display: block;
+    text-align: center;
+  } 
+`
+
+const BackWrap = styled(BackSide)`
+  .wineInfo {
+    display: block;
+    span {
+      display: block;
+      margin: 16px;
+    }
+  }
 `
