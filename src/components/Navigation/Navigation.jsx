@@ -1,26 +1,31 @@
 import React from 'react';
 import styled from 'styled-components';
-import { AiFillStar } from 'react-icons/ai'
+import { AiOutlineHome, AiOutlineSearch } from 'react-icons/ai';
+import { BiUser } from 'react-icons/bi';
+import { MdWineBar } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
 
 function Navigation() {
+  const navigate = useNavigate();
+
   return (
     <NavContainer>
       <div className='navigation'>
-        <NavButton>
-          <AiFillStar />
-          <span>Home</span>
+        <NavButton onClick={() => navigate('/')}>
+          <AiOutlineHome />
+          <span>홈</span>
         </NavButton>
-        <NavButton>
-          <AiFillStar />
-          <span>Home</span>
+        <NavButton onClick={() => navigate('/search')}>
+          <AiOutlineSearch />
+          <span>검색</span>
         </NavButton>
-        <NavButton>
-          <AiFillStar />
-          <span>Home</span>
+        <NavButton onClick={() => navigate('/wine')}>
+          <MdWineBar />
+          <span>테스트</span>
         </NavButton>
-        <NavButton>
-          <AiFillStar />
-          <span>Home</span>
+        <NavButton onClick={() => navigate('/signin')}>
+          <BiUser />
+          <span>마이페이지</span>
         </NavButton>
       </div>
     </NavContainer>
