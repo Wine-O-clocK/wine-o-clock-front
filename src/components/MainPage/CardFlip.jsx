@@ -43,12 +43,13 @@ function CardFlip({ wine }) {
 export default CardFlip;
 
 const CardWrap = styled.div`
+  border-radius: 25px;
+  padding: 0 30px;
   img {
     height: auto;
   }
   .flippy-container {
     margin: 0 10px;
-    border: 1px solid gray;
   }
   .card {
     text-align: center;
@@ -61,7 +62,7 @@ const FrontWrap = styled(FrontSide)`
   text-align: center;
   align-items: center;
   width: 100%;
-
+  box-shadow: none;
   .wineName {
     font-weight: bold;
     display: block;
@@ -70,6 +71,7 @@ const FrontWrap = styled(FrontSide)`
 `
 
 const BackWrap = styled(BackSide)`
+  box-shadow: none;
   .wineInfo {
     display: block;
     span {
