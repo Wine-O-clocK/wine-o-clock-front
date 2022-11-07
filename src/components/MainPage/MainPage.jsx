@@ -6,9 +6,21 @@ import styled from 'styled-components';
 import { wine } from '../../data';
 import CardFlip from './CardFlip';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { LoginState, LoginUserName } from '../../states/LoginState';
 
 function MainPage() {
   const navigate = useNavigate();
+  const isLoggedIn = useRecoilValue(LoginState);
+  const loginUserName = useRecoilValue(LoginUserName);
+
+  const category = [
+    { title: '이달의 와인 TOP5', value: 'mention' },
+    { title: '선물하기 좋은 와인 TOP5', value: 'present' },
+    { title: '접근성 좋은 와인 TOP5', value: 'access' },
+    { title: '가성비 좋은 와인 TOP5', value: 'price' }
+  ];
+
   const settings = {
     dots: true,
     infinite: true,
@@ -20,43 +32,39 @@ function MainPage() {
   return (
     <MainContainer>
       <div className='loginWrapper'>
-        <div>로그인하고 나만을 위해 준비된<br/>와인을 만나보세요!</div>
-        <button onClick={() => navigate('/signin')}>로그인</button>
-      </div>
-      <SlideContainer>
-        <p className='title'>이달의 와인 TOP5</p>
-        <SlideWrapper {...settings}>
-          {
-            wine.mention.map((w) => (
-              <CardFlip wine={w} className='card' />
-            ))
-          }
-        </SlideWrapper>
+        {isLoggedIn
+          ? (
+            <>
+              <div><span>{loginUserName}</span>님의 취향 저격 와인<br />AI가 골라드려요!</div>
+              <button onClick={() => navigate('/signin')}>와인 추천받기</button>
+            </>
+          )
 
-        <p className='title'>접근성 TOP5</p>
-        <SlideWrapper {...settings}>
-          {
-            wine.access.map((w) => (
-              <CardFlip wine={w} className='card' />
-            ))
-          }
-        </SlideWrapper>
-        <p className='title'>선물 TOP5</p>
-        <SlideWrapper {...settings}>
-          {
-            wine.present.map((w) => (
-              <CardFlip wine={w} className='card' />
-            ))
-          }
-        </SlideWrapper>
-        <p className='title'>가성비 TOP5</p>
-        <SlideWrapper {...settings}>
-          {
-            wine.price.map((w) => (
-              <CardFlip wine={w} className='card' />
-            ))
-          }
-        </SlideWrapper>
+          : (
+            <>
+              <div>로그인하고 나만을 위해 준비된<br />와인을 만나보세요!</div>
+              <button onClick={() => navigate('/signin')}>로그인</button>
+            </>
+          )
+        }
+      </div>
+
+      <SlideContainer>
+        {
+          category.map((c) => {
+            const key = c.value
+            return (
+              <>
+                <p className='title'>{c.title}</p>
+                <SlideWrapper {...settings}>
+                  {
+                    wine[key].map((w) => (
+                      <CardFlip wine={w} className='card' />
+                    ))
+                  }
+                </SlideWrapper></>
+            )})
+        }
       </SlideContainer>
     </MainContainer>
   );
@@ -66,17 +74,14 @@ export default MainPage;
 
 const MainContainer = styled.div`
   margin: 0 24px;
-  .logo {
-    margin-bottom: -16px;
-    font-family: 'nanumbold';
-  }
+  span {font-weight: bold}
+  
   .loginWrapper {
-    margin-top: 28px;
     height: 66px;
     border-radius: 25px;
     background-color: #C57AEA;
     box-shadow: 4px 8px 10px 0 rgba(0, 0, 0, 0.2);
-    padding: 20px;
+    padding: 15px 20px 25px;
     div {
       color: #FFFFFF;
     }
