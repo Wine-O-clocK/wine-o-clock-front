@@ -41,8 +41,9 @@ const NavContainer = styled.div`
   width: 100vw;
 
   .navigation {
-    height: 50px;
+    height: 55px;
     padding: 8px 0;
+    box-sizing: border-box;
     background-color: #e7e5e5;
     
     display: flex;
