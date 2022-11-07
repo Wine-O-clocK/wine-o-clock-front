@@ -10,12 +10,14 @@ function SignInPage() {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('')
+  const [isEmail, setIsEmail] = useState(false);
+  const [emailMessage, setEmailMessage] = useState('');
   const [pwd, setPwd] = useState('');
   const [confirm, setConfirm] = useState(true);  // 유효성 검사
 
   const onChangeEmail = (e) => {
     e.preventDefault();
-    setEmail(e.target.value)
+    setEmail(e.target.value);
   }
   const onChangePwd = (e) => {
     e.preventDefault();
@@ -30,7 +32,6 @@ function SignInPage() {
   return (
     <SignUpContainer>
       <div className='titleWrap'>
-        <h1>Wine O'clocK</h1>
         <h3>로그인</h3>
       </div>
       <InputForm onSubmit={handleSubmit}>
@@ -70,7 +71,7 @@ function SignInPage() {
 export default SignInPage;
 
 const SignUpContainer = styled.div`
-  margin: 64px 32px;
+  margin: 0 22px;
   padding: 16px 32px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
@@ -100,7 +101,7 @@ const SignUpContainer = styled.div`
     align-items: center;
     justify-content: space-around;
 
-    color: 4F4F4F;
+    color: #4F4F4F;
     font-size: 13px;
   }
 `;
@@ -122,19 +123,20 @@ const InputForm = styled.form`
   }
   
   button {
-  height: 30px;
+  height: 45px;
   border-radius: 5px;
-  border: lightgray;
-  background-color: #8D8D8D;
-  color: #FAFAFA;
+  border: 1px solid #9F9F9F;
+  background-color: #CDCDCD;
+  color: #333333;
   margin-bottom: 16px;
   }
 `
 const StyledInput = styled.input`
-  height: 30px;
+  height: 45px;
   border-radius: 5px;
-  border: lightgray;
+  border: 1px solid #8D8D8D;
   color: #8D8D8D;
   background-color: #FAFAFA;
   margin-bottom: 16px;
+  padding: 0 10px;
 `
