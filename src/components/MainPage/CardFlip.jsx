@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import Flippy, { FrontSide, BackSide } from 'react-flippy';
+import Rating from './Rating';
 
 function CardFlip({ wine }) {
   const wineInfo = {
@@ -8,6 +9,8 @@ function CardFlip({ wine }) {
     wineName: wine[1],
     wineNameEng: wine[2],
     wineType: wine[3],
+    wineSweet: wine[6],
+    wineBody: wine[7],
     wineVariety: wine[8]
   }
 
@@ -28,10 +31,12 @@ function CardFlip({ wine }) {
         <BackWrap>
           <div className='card'>
             <div className='wineInfo'>
+              <span className='wineNameEng'>{wineInfo.wineNameEng}</span>
               <span>{wineInfo.wineName}</span>
-              <span>{wineInfo.wineNameEng}</span>
               <span>{wineInfo.wineType}</span>
-              <span>{wineInfo.wineVariety}</span>
+              <span className='rating'>당도 : <Rating cnt={wineInfo.wineSweet}/></span>
+              <span className='rating'>바디 : <Rating cnt={wineInfo.wineBody}/></span>
+              <span>품종 : {wineInfo.wineVariety}</span>
             </div>
           </div>
         </BackWrap>
@@ -73,10 +78,23 @@ const FrontWrap = styled(FrontSide)`
 const BackWrap = styled(BackSide)`
   box-shadow: none;
   .wineInfo {
-    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
     span {
       display: block;
       margin: 16px;
+    }
+    .wineNameEng {
+      font-style: italic;
+    }
+    .rating {
+      width: fit-content;
+      display: flex;
+      flex-direction: row;
+      margin: 8px auto;
     }
   }
 `

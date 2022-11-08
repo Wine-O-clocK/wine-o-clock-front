@@ -14,8 +14,11 @@ function Header() {
 export default Header;
 
 const HeaderWrap = styled.div`
-  display: inline-block;
   font-family: 'nanumextra';
   padding-top: 8px;
   margin-left: 22px;
+
+  h1 {
+    display: inline-block;
+  }
 `
