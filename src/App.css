@@ -18,7 +18,10 @@
 body {
   width: 100vw;
   margin: 0;
-  font-family: 'nanumregular';
+  font-family: "nanumregular";
 }
 
-img { max-width:100%; height: auto }
+img {
+  max-width: 100%;
+  height: auto;
+}
