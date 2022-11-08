@@ -1,6 +1,4 @@
-import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import AromaType from './AromaType';
@@ -10,17 +8,6 @@ function SignUpDetailPage() {
   const location = useLocation();
   const [userName, setUserName] = useState('');
   const [userBirth, setUserBirth] = useState('');
-  const [userPhoneNum, setUserPhoneNum] = useState('');
-
-  useEffect(() => {
-    if (userPhoneNum.length === 11) {
-      const userPhone = userPhoneNum.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3')
-      setUserPhoneNum(userPhone);
-    } else if (userPhoneNum.length === 13) {
-      const userPhone = userPhoneNum.replace(/-/g, '').replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
-      setUserPhoneNum(userPhone);
-    }
-  }, [userPhoneNum])
 
   // 와인 종류
   const wineType = [
@@ -75,7 +62,7 @@ function SignUpDetailPage() {
     }
   }
 
-  const isValid = (userName !== '' && userBirth !== '' && userBirth !== '' 
+  const isValid = (userName !== '' && userBirth.length === 8 
                     && checkedItems.length >= 1 && sweetRes !== null & bodyRes !== null) ? true : false;
 
   const handleSubmit = (e) => {
@@ -85,7 +72,6 @@ function SignUpDetailPage() {
       'pwd': location.state.pwd,
       'userName': userName,
       'birthday': userBirth,
-      'phone': userPhoneNum,
       'userLikeType': checkedItems,
       'userWineSweet': sweetRes,
       'userWineBody': bodyRes,
@@ -95,6 +81,7 @@ function SignUpDetailPage() {
     }
     console.log(userInfo);
   }
+
   return (
     <SignUpContainer>
       <form onSubmit={handleSubmit}>
@@ -117,13 +104,6 @@ function SignUpDetailPage() {
               placeholder='생년월일 (YYYYMMDD)'
               value={userBirth}
               onChange={(e) => setUserBirth(e.target.value)}
-              required
-            />
-            <StyledInput
-              type='text'
-              placeholder='전화번호'
-              value={userPhoneNum}
-              onChange={(e) => setUserPhoneNum(e.target.value)}
               required
             />
           </InputForm>
