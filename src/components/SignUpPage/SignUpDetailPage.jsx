@@ -1,14 +1,26 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import AromaType from './AromaType';
-import 'react-datepicker/dist/react-datepicker.css';
 import WineType from './WineType';
 
 function SignUpDetailPage() {
+  const location = useLocation();
   const [userName, setUserName] = useState('');
   const [userBirth, setUserBirth] = useState('');
   const [userPhoneNum, setUserPhoneNum] = useState('');
+
+  useEffect(() => {
+    if (userPhoneNum.length === 11) {
+      const userPhone = userPhoneNum.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3')
+      setUserPhoneNum(userPhone);
+    } else if (userPhoneNum.length === 13) {
+      const userPhone = userPhoneNum.replace(/-/g, '').replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+      setUserPhoneNum(userPhone);
+    }
+  }, [userPhoneNum])
 
   // 와인 종류
   const wineType = [
@@ -63,18 +75,25 @@ function SignUpDetailPage() {
     }
   }
 
+  const isValid = (userName !== '' && userBirth !== '' && userBirth !== '' 
+                    && checkedItems.length >= 1 && sweetRes !== null & bodyRes !== null) ? true : false;
+
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const userInfo = {
-      '이름': userName,
-      '생년월일': userBirth,
-      '전화번호': userPhoneNum,
-      '종류': checkedItems,
-      '당도': sweetRes,
-      '바디': bodyRes,
-      '아로마': checkedAroma
+      'email': location.state.email,
+      'pwd': location.state.pwd,
+      'userName': userName,
+      'birthday': userBirth,
+      'phone': userPhoneNum,
+      'userLikeType': checkedItems,
+      'userWineSweet': sweetRes,
+      'userWineBody': bodyRes,
+      'userWineAroma1': checkedAroma[0],
+      'userWineAroma2': checkedAroma[1],
+      'userWineAroma3': checkedAroma[2],
     }
-    console.log(userInfo)
+    console.log(userInfo);
   }
   return (
     <SignUpContainer>
@@ -91,18 +110,21 @@ function SignUpDetailPage() {
               placeholder='이름'
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
+              required
             />
             <StyledInput
               type='text'
               placeholder='생년월일 (YYYYMMDD)'
               value={userBirth}
               onChange={(e) => setUserBirth(e.target.value)}
+              required
             />
             <StyledInput
               type='text'
-              placeholder='전화번호 (000-0000-0000)'
+              placeholder='전화번호'
               value={userPhoneNum}
               onChange={(e) => setUserPhoneNum(e.target.value)}
+              required
             />
           </InputForm>
         </div>
@@ -134,13 +156,14 @@ function SignUpDetailPage() {
                     type='radio'
                     name='responseType'
                     value={type.value}
-                    onChange={(e) => setSweetRes(e.target.value)}
-                    checked={idx == sweetRes}
+                    onChange={(e) => setSweetRes(Number(e.target.value))}
+                    checked={idx === sweetRes}
+                    required
                   />
                   <span className='responseTypeBtn'
                     style={{
-                      color: idx == sweetRes ? '#CB53F5' : '#8D8D8D',
-                      border: idx == sweetRes ? '1px solid #CB53F5' : '1px solid #666666'
+                      color: idx === sweetRes ? '#CB53F5' : '#8D8D8D',
+                      border: idx === sweetRes ? '1px solid #CB53F5' : '1px solid #666666'
                     }}>{type.type}</span>
                 </label>
               ))
@@ -155,13 +178,14 @@ function SignUpDetailPage() {
                     type='radio'
                     name='responseType'
                     value={type.value}
-                    onChange={(e) => setBodyRes(e.target.value)}
-                    checked={idx == bodyRes}
+                    onChange={(e) => setBodyRes(Number(e.target.value))}
+                    checked={idx === bodyRes}
+                    required
                   />
                   <span className='responseTypeBtn'
                     style={{
-                      color: idx == bodyRes ? '#CB53F5' : '#8D8D8D',
-                      border: idx == bodyRes ? '1px solid #CB53F5' : '1px solid #666666'
+                      color: idx === bodyRes ? '#CB53F5' : '#8D8D8D',
+                      border: idx === bodyRes ? '1px solid #CB53F5' : '1px solid #666666'
                     }}>{type.type}</span>
                 </label>
               ))
@@ -180,7 +204,11 @@ function SignUpDetailPage() {
               ))
             }
           </InputForm>
-          <button className='signUpBtn' onSubmit={handleSubmit}>회원가입</button>
+          <button 
+            onSubmit={handleSubmit}
+            className={isValid ? 'signUpBtn active' : 'signUpBtn disabled'}
+            disabled={!isValid ? true : false}
+          >회원가입</button>
         </div>
       </form>
     </SignUpContainer >
@@ -256,10 +284,20 @@ const SignUpContainer = styled.div`
     height: 45px;
     border-radius: 5px;
     border: 1px solid #9F9F9F;
-    background-color: #CDCDCD;
     color: #333333;
     margin-bottom: 16px;
     width: 100%;
+  }
+  .active {
+    background-color: #9F9F9F;
+    color: #FFFFFF;
+    font-weight: bold;
+  }
+  .active:active {
+    transform : translateY(0.5px);
+  }
+  .disabled {
+    background-color: #CDCDCD;
   }
 `;
 

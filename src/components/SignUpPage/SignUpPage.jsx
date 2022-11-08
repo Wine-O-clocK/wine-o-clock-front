@@ -30,11 +30,11 @@ function SignUpPage() {
     const emailCurrent = e.target.value;
     setEmail(emailCurrent);
     if (!emailRegex.test(emailCurrent)) {
-      setEmailMessage('잘못된 이메일 형식입니다.')
-      setIsEmail(false)
+      setEmailMessage('잘못된 이메일 형식입니다.');
+      setIsEmail(false);
     } else {
-      setEmailMessage('올바른 이메일 형식입니다.')
-      setIsEmail(true)
+      setEmailMessage('올바른 이메일 형식입니다.');
+      setIsEmail(true);
     }
   }
 
@@ -45,34 +45,46 @@ function SignUpPage() {
     setPwd(pwdCurrent);
 
     if (!pwdRegex.test(pwdCurrent)) {
-      setPwdMessage('숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요.')
-      setIsPwd(false)
+      setPwdMessage('숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요.');
+      setIsPwd(false);
     } else {
-      setPwdMessage('안전한 비밀번호입니다.')
-      setIsPwd(true)
+      setPwdMessage('안전한 비밀번호입니다.');
+      setIsPwd(true);
     }
   }
 
   const onChangeConfirmPwd = (e) => {
     e.preventDefault();
-    const pwdConfirm = e.target.value
-    setConfirmPwd(pwdConfirm)
+    const pwdConfirm = e.target.value;
+    let confirmResult = '';
+    setConfirmPwd(pwdConfirm);
 
     if (pwd === pwdConfirm) {
       setPwdConfirmMessage('비밀번호가 일치합니다.');
       setIsPwdConfirm(true);
+      confirmResult = true;
     } else {
-      setPwdConfirmMessage('비밀번호가 일치하지 않습니다..');
+      setPwdConfirmMessage('비밀번호가 일치하지 않습니다.');
       setIsPwdConfirm(false);
+      confirmResult = false;
+    }
+
+    if (isEmail && isPwd && confirmResult) {
+      setIsConfirm(true);
+    } else {
+      setIsConfirm(false);
     }
   }
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (isEmail && isPwd && isPwdConfirm) {
-      navigate('/signup/detail');
-    } else {
-      alert('올바른 정보를 입력해주세요.')
+      navigate('/signup/detail', {
+        state: {
+          email: email,
+          pwd: pwd
+        }
+      });
     }
   }
 
@@ -105,14 +117,20 @@ function SignUpPage() {
           onChange={(e) => onChangeConfirmPwd(e)}
           value={confirmPwd || ''}
         />
-         <div className={isPwdConfirm ? 'confirmMessage' : 'error'}>{pwdConfirmMessage}</div>
-        <button onSubmit={handleSubmit}>다음으로 넘어가기</button>
+        <div className={isPwdConfirm ? 'confirmMessage' : 'error'}>{pwdConfirmMessage}</div>
+        <button
+          onSubmit={handleSubmit}
+          className={isConfirm ? 'nextBtn active' : 'nextBtn disabled'}
+          disabled={!isConfirm ? true : false}
+        >
+          다음으로 넘어가기
+        </button>
       </InputForm>
       <hr />
       <div className='socialSignUp'>
-        <img src={socialGoogle}/>
-        <img src={socialNaver}/>
-        <img src={socialKakao}/>
+        <img src={socialGoogle} />
+        <img src={socialNaver} />
+        <img src={socialKakao} />
       </div>
     </SignUpContainer>
   );
@@ -156,25 +174,37 @@ const InputForm = styled.form`
     font-size: 11px;
     font-weight: bold;
     text-align: left;
+    margin-bottom: 8px;
   }
   .error {
     color: red;
     font-size: 11px;
     font-weight: bold;
     text-align: left;
+    margin-bottom: 8px;
   }
 
   input:focus {
     outline: none;
   }
   
-  button {
+  .nextBtn {
     height: 45px;
     border-radius: 5px;
     border: 1px solid #9F9F9F;
-    background-color: #CDCDCD;
     color: #333333;
     margin-bottom: 16px;
+  }
+  .active {
+    background-color: #9F9F9F;
+    color: #FFFFFF;
+    font-weight: bold;
+  }
+  .active:active {
+    transform : translateY(0.5px);
+  }
+  .disabled {
+    background-color: #CDCDCD;
   }
 `
 const StyledInput = styled.input`
@@ -183,6 +213,6 @@ const StyledInput = styled.input`
   border: 1px solid #8D8D8D;
   color: #8D8D8D;
   background-color: #FAFAFA;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   padding: 0 10px;
 `

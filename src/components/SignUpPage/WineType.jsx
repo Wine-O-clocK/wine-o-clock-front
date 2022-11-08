@@ -27,7 +27,8 @@ function WineType({ type, checkedItemHandler, checkedItems }) {
           name='wineType'
           checked={isChecked}
           value={type.value}
-          onChange={(e) => onCheck(e)}
+          onChange={onCheck}
+          required
         />
         <span className='wineTypeBtn'
           style={{
