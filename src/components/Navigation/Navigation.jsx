@@ -5,10 +5,14 @@ import { BiUser } from 'react-icons/bi';
 import { MdWineBar } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { LoginState } from '../../states/LoginState';
 
 function Navigation() {
   const navigate = useNavigate();
-  const [active, setActice] = useState(0);
+  const [active, setActice] = useState(1);
+  const isLoggedIn = useRecoilValue(LoginState);
+
   return (
     <NavContainer>
       <div className='navigation'>
@@ -35,7 +39,7 @@ function Navigation() {
         </NavButton>
         <NavButton onClick={() => {
           setActice(4)
-          navigate('/mypage')
+          isLoggedIn ? navigate('/mypage') : navigate('/signin')
         }}>
           <BiUser className={active === 4 ? "nav-item active" : "nav-item"} />
           <span>마이페이지</span>
