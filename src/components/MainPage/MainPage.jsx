@@ -51,18 +51,19 @@ function MainPage() {
 
       <SlideContainer>
         {
-          category.map((c) => {
+          category.map((c, idx) => {
             const key = c.value
             return (
-              <>
+              <div key={idx}>
                 <p className='title'>{c.title}</p>
                 <SlideWrapper {...settings}>
                   {
-                    wine[key].map((w) => (
-                      <CardFlip wine={w} className='card' />
+                    wine[key].map((w,idx) => (
+                      <CardFlip key={idx} className='card' wine={w}/>
                     ))
                   }
-                </SlideWrapper></>
+                </SlideWrapper>
+              </div>
             )})
         }
       </SlideContainer>

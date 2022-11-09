@@ -10,8 +10,8 @@ function Rating({ cnt }) {
   return (
     <RatingWrap>
       {
-        arr.map((e) => (
-          e ? <BsCircleFill className='circle' /> : <BsCircle className='circle empty' />
+        arr.map((e, idx) => (
+          e ? <BsCircleFill key={idx} className='circle' /> : <BsCircle key={idx} className='circle empty' />
         ))
       }
     </RatingWrap>
