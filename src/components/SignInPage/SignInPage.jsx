@@ -5,27 +5,67 @@ import socialGoogle from '../../assets/img/social_google.svg';
 import socialNaver from '../../assets/img/social_naver.svg';
 import socialKakao from '../../assets/img/social_kakao.svg';
 import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import { LoginState, LoginUserEmail, LoginUserName, LoginUserPwd } from '../../states/LoginState';
 
 function SignInPage() {
   const navigate = useNavigate();
 
+  // 사용자 임시 계정
+  const user = {
+    name: '임가비',
+    id: 'abc0000@naver.com',
+    pwd: 'wine1234*'
+  }
+  
   const [email, setEmail] = useState('')
   const [isEmail, setIsEmail] = useState(false);
   const [emailMessage, setEmailMessage] = useState('');
   const [pwd, setPwd] = useState('');
-  const [confirm, setConfirm] = useState(true);  // 유효성 검사
+  const [isConfirm, setIsConfirm] = useState(false);  // 유효성 검사
+
+  // 상태 저장
+  const setIsLoggedIn = useSetRecoilState(LoginState);
+  const setUserName = useSetRecoilState(LoginUserName);
+  const setUserLoginEmail = useSetRecoilState(LoginUserEmail);
+  const setUserLoginPwd = useSetRecoilState(LoginUserPwd);
 
   const onChangeEmail = (e) => {
     e.preventDefault();
-    setEmail(e.target.value);
+    const emailRegex =
+      /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    const emailCurrent = e.target.value;
+    setEmail(emailCurrent);
+    if (!emailRegex.test(emailCurrent)) {
+      setEmailMessage('이메일 형식으로 입력해주세요.');
+      setIsEmail(false);
+    } else {
+      setEmailMessage("");
+      setIsEmail(true);
+    }
   }
+
   const onChangePwd = (e) => {
     e.preventDefault();
-    setPwd(e.target.value)
+    setPwd(e.target.value);
+    if (isEmail && pwd.length > 1) {
+      setIsConfirm(true);
+    } else {
+      setIsConfirm(false);
+    }
   }
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    if (email === user.id && pwd === user.pwd) {
+      setUserName(user.name);
+      setUserLoginEmail(email);
+      setUserLoginPwd(pwd);
+      setIsLoggedIn(true);
+      navigate('/')
+    } else {
+      alert('이메일이나 비밀번호가 일치하지 않습니다.')
+    }
 
   }
 
@@ -39,20 +79,25 @@ function SignInPage() {
           type='text'
           className='email'
           placeholder='이메일'
-          onChange={(e) => onChangeEmail(e)}
+          onChange={onChangeEmail}
           value={email || ''}
         />
+        <div className={isEmail ? 'confirmMessage' : 'error'}>{emailMessage}</div>
         <StyledInput
           type='password'
           className='pwd'
           placeholder='비밀번호'
-          onChange={(e) => onChangePwd(e)}
+          onChange={onChangePwd}
           value={pwd || ''}
         />
-        {
+        {/* {
           !confirm && <div className='error'>비밀번호가 일치하지 않습니다.</div>
-        }
-        <button onSubmit={handleSubmit}>로그인</button>
+        } */}
+        <button 
+          onSubmit={handleSubmit}
+          className={isConfirm ? 'loginBtn active' : 'loginBtn disabled'}
+          disabled={!isConfirm ? true : false}
+        >로그인</button>
       </InputForm>
       <hr />
       <div className='socialSignIn'>
@@ -111,24 +156,43 @@ const InputForm = styled.form`
   flex-direction: column;
   text-align: center;
 
+  .confirmMessage {
+    color: #2a2929;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 8px;
+  }
   .error {
     color: red;
     font-size: 11px;
     font-weight: bold;
-    padding: 8px 3px;
+    text-align: left;
+    margin-bottom: 8px;
   }
 
   input:focus {
     outline: none;
   }
   
-  button {
+  .loginBtn {
   height: 45px;
   border-radius: 5px;
   border: 1px solid #9F9F9F;
   background-color: #CDCDCD;
   color: #333333;
   margin-bottom: 16px;
+  }
+  .active {
+    background-color: #9F9F9F;
+    color: #FFFFFF;
+    font-weight: bold;
+  }
+  .active:active {
+    transform : translateY(0.5px);
+  }
+  .disabled {
+    background-color: #CDCDCD;
   }
 `
 const StyledInput = styled.input`
@@ -137,6 +201,6 @@ const StyledInput = styled.input`
   border: 1px solid #8D8D8D;
   color: #8D8D8D;
   background-color: #FAFAFA;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   padding: 0 10px;
 `
