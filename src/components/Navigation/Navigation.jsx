@@ -16,28 +16,28 @@ function Navigation() {
           setActice(1)
           navigate('/')
         }}>
-          <AiOutlineHome className={active === 1 ? "nav-item active" : "nav-item"}/>
+          <AiOutlineHome className={active === 1 ? "nav-item active" : "nav-item"} />
           <span>홈</span>
         </NavButton>
         <NavButton onClick={() => {
           setActice(2)
           navigate('/search')
         }}>
-          <AiOutlineSearch className={active === 2 ? "nav-item active" : "nav-item"}/>
+          <AiOutlineSearch className={active === 2 ? "nav-item active" : "nav-item"} />
           <span>검색</span>
         </NavButton>
         <NavButton onClick={() => {
           setActice(3)
           navigate('/wine')
         }}>
-          <MdWineBar className={active === 3 ? "nav-item active" : "nav-item"}/>
+          <MdWineBar className={active === 3 ? "nav-item active" : "nav-item"} />
           <span>테스트</span>
         </NavButton>
         <NavButton onClick={() => {
           setActice(4)
-          navigate('/signin')
+          navigate('/mypage')
         }}>
-          <BiUser className={active === 4 ? "nav-item active" : "nav-item"}/>
+          <BiUser className={active === 4 ? "nav-item active" : "nav-item"} />
           <span>마이페이지</span>
         </NavButton>
       </div>
@@ -58,13 +58,13 @@ const NavContainer = styled.div`
     padding: 8px 0;
     box-sizing: border-box;
     background-color: #e7e5e5;
-    
+
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
   }
-`
+`;
 
 const NavButton = styled.div`
   display: flex;
@@ -79,4 +79,4 @@ const NavButton = styled.div`
   .active {
     color: #9E4DC4
   }
-`
+`;
