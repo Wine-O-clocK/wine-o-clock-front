@@ -17,7 +17,6 @@ const HeaderWrap = styled.div`
   font-family: "nanumextra";
   padding-top: 8px;
   margin-left: 22px;
-
   h1 {
     display: inline-block;
   }
