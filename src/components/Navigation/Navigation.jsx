@@ -19,7 +19,7 @@ function Navigation() {
           <AiOutlineSearch />
           <span>검색</span>
         </NavButton>
-        <NavButton onClick={() => navigate("/wine")}>
+        <NavButton onClick={() => navigate("/winetestpage")}>
           <MdWineBar />
           <span>테스트</span>
         </NavButton>
