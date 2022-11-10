@@ -12,7 +12,7 @@ function Navigation() {
   const navigate = useNavigate();
   const [active, setActice] = useState(1);
   const isLoggedIn = useRecoilValue(LoginState);
-
+  if (window.location.pathname === "/winetestpage") return null;
   return (
     <NavContainer>
       <div className="navigation">

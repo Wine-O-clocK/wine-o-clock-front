@@ -19,7 +19,7 @@ const BottomSelectWrap = styled.div`
   bottom: 0;
   width: 100vw;
   height: 60px;
-  margin-bottom: 55px;
+  /* margin-bottom: 55px; */
   background-color: #ffffff;
 
   button {
