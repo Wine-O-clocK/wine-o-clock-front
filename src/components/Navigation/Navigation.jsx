@@ -38,8 +38,15 @@ function Navigation() {
           />
           <span>검색</span>
         </NavButton>
-        <NavButton onClick={() => navigate("/winetestpage")}>
-          <MdWineBar />
+        <NavButton
+          onClick={() => {
+            setActice(3);
+            navigate("/winetestpage");
+          }}
+        >
+          <MdWineBar
+            className={active === 3 ? "nav-item active" : "nav-item"}
+          />
           <span>테스트</span>
         </NavButton>
         <NavButton
