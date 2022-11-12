@@ -4,26 +4,26 @@ import styled from "styled-components";
 function WinyHelloComponent() {
   return (
     <>
-      <UserInfoWrap>
-        <UserImgWrap>
+      <WinyHelloWrap>
+        <WinyImgWrap>
           <img src="https://ifh.cc/g/ZJJJd6.png" alt="프로필사진" />
-        </UserImgWrap>
+        </WinyImgWrap>
         <WinyBubbleWrap>
           <p>나는 와이니!</p>
           <br />
           <p>너의 와인 취향을 알아보지 않을래?</p>
         </WinyBubbleWrap>
-      </UserInfoWrap>
+      </WinyHelloWrap>
     </>
   );
 }
 
-const UserInfoWrap = styled.div`
+const WinyHelloWrap = styled.div`
   display: flex;
-  height: 100px;
+  height: 130px;
 `;
 
-const UserImgWrap = styled.div`
+const WinyImgWrap = styled.div`
   margin: 15px 0;
   margin-left: 15px;
   margin-right: 5px;

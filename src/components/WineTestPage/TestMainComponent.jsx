@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import UserHelloComponent from "./User/UserHelloComponent";
 import WinyHelloComponent from "./Winy/WinyHelloComponent";
 
 function TestMainComponent() {
@@ -7,6 +8,7 @@ function TestMainComponent() {
     <>
       <TestMainWrap>
         <WinyHelloComponent />
+        <UserHelloComponent />
       </TestMainWrap>
     </>
   );
