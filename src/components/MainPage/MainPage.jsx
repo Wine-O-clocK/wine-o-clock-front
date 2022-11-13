@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { wine } from '../../data';
 import CardFlip from './CardFlip';
 import LoginPermission from './LoginPermission';
+import RecentWine from './RecentWine';
 
 function MainPage() {
   const category = [
@@ -26,6 +27,7 @@ function MainPage() {
   return (
     <MainContainer>
       <LoginPermission/>
+      <RecentWine/>
       <SlideContainer>
         {
           category.map((c, idx) => {
