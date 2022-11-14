@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-function WinyHelloComponent() {
+function WinyQuestionComponent({ questionMessage }) {
   return (
     <>
       <WinyHelloWrap>
@@ -9,9 +9,7 @@ function WinyHelloComponent() {
           <img src="https://ifh.cc/g/ZJJJd6.png" alt="프로필사진" />
         </WinyImgWrap>
         <WinyBubbleWrap>
-          <p>나는 와이니!</p>
-          <br />
-          <p>너의 와인 취향을 알아보지 않을래?</p>
+          <p>{questionMessage}</p>
         </WinyBubbleWrap>
       </WinyHelloWrap>
     </>
@@ -20,11 +18,26 @@ function WinyHelloComponent() {
 
 const WinyHelloWrap = styled.div`
   display: flex;
-  height: 130px;
+  height: 65px;
+
+  animation: fadein 0.3s;
+  -webkit-animation: fadein 0.3s;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+
+  @keyframes fadein {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 `;
 
 const WinyImgWrap = styled.div`
-  margin: 15px 0;
+  margin: auto 0;
   margin-left: 15px;
   margin-right: 5px;
   width: 50px;
@@ -32,10 +45,11 @@ const WinyImgWrap = styled.div`
 `;
 
 const WinyBubbleWrap = styled.div`
-  margin: 8px 0;
+  margin: auto 0;
   p {
     display: inline-block;
     border-radius: 4px 20px 20px 18px;
+    /* border: 1.6px solid #c371ea; */
     background-color: #eaeaea;
     color: #000000;
     cursor: pointer;
@@ -47,4 +61,4 @@ const WinyBubbleWrap = styled.div`
   }
 `;
 
-export default WinyHelloComponent;
+export default WinyQuestionComponent;

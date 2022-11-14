@@ -1,37 +1,38 @@
 import React from "react";
 import styled from "styled-components";
 
-function UserHelloComponent() {
+function UserBubbleComponent({ bubbleMessage }) {
   return (
     <>
-      <UserHelloWrap>
+      <UserBubbleBoxWrap>
         <UserBubbleWrap>
-          <p>응! 알아볼래 😊</p>
+          <p>{bubbleMessage}</p>
         </UserBubbleWrap>
-      </UserHelloWrap>
+      </UserBubbleBoxWrap>
     </>
   );
 }
 
-const UserHelloWrap = styled.div`
+const UserBubbleBoxWrap = styled.div`
   /* display: flex; */
   height: 70px;
 `;
 
 const UserBubbleWrap = styled.div`
   float: right;
-  margin: 8px 15px;
+  margin: 4px 15px;
   p {
     display: inline-block;
-    border-radius: 18px;
+    border-radius: 20px 18px 4px 20px;
     background-color: #cc86ec;
     color: #ffffff;
     cursor: pointer;
     margin: 6px 0;
     margin-left: 10px;
-    padding: 15px 18px;
+    padding: 10px 18px;
     font-size: 95%;
+    box-shadow: 0px 1px 4px 0 rgb(0, 0, 0, 0.2);
   }
 `;
 
-export default UserHelloComponent;
+export default UserBubbleComponent;
