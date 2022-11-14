@@ -2,12 +2,13 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
+import AromaType from '../SignUpPage/AromaType';
 import * as Styled from '../styles/input.style';
 
 function SearchPage() {
   const [selectedType, setSelectedType] = useState(-1);
   const [selectedPrice, setSelectedPrice] = useState(-1);
-  const [selectedAroma, setSelectedAroma] = useState(-1);
+  const [selectedAroma, setSelectedAroma] = useState([]);
   const [isConfirm, setIsConfirm] = useState(false);
 
   useEffect(() => {
@@ -31,16 +32,30 @@ function SearchPage() {
     { type: '전체 가격', value: 5 }
   ]
   const wineAroma = [
-    { type: '꽃', value: 0 },
-    { type: '레몬', value: 1 },
-    { type: '말린과일', value: 2 },
-    { type: '베리', value: 3 },
-    { type: '사과', value: 4 },
-    { type: '시나몬', value: 5 },
-    { type: '견과류', value: 6 },
-    { type: '파인애플', value: 7 }, 
-    { type: '허브', value: 8 }
+    { type: '꽃', value: 'flower' },
+    { type: '시나몬', value: 'cinnamon' },
+    { type: '파인애플', value: 'pineapple' },
+    { type: '말린과일', value: 'dried fruit' },
+    { type: '사과', value: 'apple' },
+    { type: '레몬', value: 'lemon' },
+    { type: '견과류', value: 'nuts' },
+    { type: '베리', value: 'berry' },
+    { type: '허브', value: 'herb' }
   ];
+  const checkedAromaHandler = (item, isChecked) => {
+    if (isChecked) {
+      setSelectedAroma([...selectedAroma, item])
+    } else if (!isChecked && selectedAroma.find(aroma => aroma === item)) {
+      const filter = selectedAroma.filter(aroma => aroma !== item)
+      setSelectedAroma([...filter])
+    }
+
+    if (selectedAroma.length > 2) {
+      alert("아로마는 최대 3개까지 선택 가능합니다.");
+      setSelectedAroma(selectedAroma.filter((aroma) => aroma !== item))
+      isChecked = false;
+    }
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -109,23 +124,13 @@ function SearchPage() {
           <span className='title'>아로마</span>
           <div className='searchBox'>
             {
-              wineAroma.map((aroma, idx) => (
-                <label key={idx}>
-                  <input
-                    type='radio'
-                    name='wineAroma'
-                    value={aroma.value}
-                    onChange={(e) => setSelectedAroma(Number(e.target.value))}
-                    checked={idx === selectedAroma}
-                    required
-                  />
-                  <span className='btn filter'
-                    style={{
-                      color: idx === selectedAroma ? '#CB53F5' : '#666666',
-                      border: idx === selectedAroma ? '1px solid #CB53F5' : 'none',
-                      backgroundColor: idx === selectedAroma && '#FAFAFA'
-                    }}>{aroma.type}</span>
-                </label>
+              wineAroma.map((type, idx) => (
+                <AromaType
+                  key={idx}
+                  type={type}
+                  checkedAromaHandler={checkedAromaHandler}
+                  checkedAroma={selectedAroma}
+                />
               ))
             }
           </div>

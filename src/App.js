@@ -11,6 +11,7 @@ import Search from "./routes/Search";
 import SignIn from "./routes/SignIn";
 import SignUp from "./routes/SignUp";
 import SignUpDetail from "./routes/SignUpDetail";
+import WineDetail from "./routes/WineDetail";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<MainPage />} />
+        <Route path="/wine/:wineNameEng" element={<WineDetail />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signup/detail" element={<SignUpDetail />} />
