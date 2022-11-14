@@ -69,15 +69,15 @@ function SignUpDetailPage() {
     e.preventDefault();
     const userInfo = {
       'email': location.state.email,
-      'pwd': location.state.pwd,
+      'password': location.state.pwd,
       'userName': userName,
       'birthday': userBirth,
       'userLikeType': checkedItems,
-      'userWineSweet': sweetRes,
-      'userWineBody': bodyRes,
-      'userWineAroma1': checkedAroma[0],
-      'userWineAroma2': checkedAroma[1],
-      'userWineAroma3': checkedAroma[2],
+      'userLikeSweet': sweetRes,
+      'userLikeBody': bodyRes,
+      'userLikeAroma1': checkedAroma[0],
+      'userLikeAroma2': checkedAroma[1],
+      'userLikeAroma3': checkedAroma[2],
     }
     console.log(userInfo);
   }
@@ -97,6 +97,7 @@ function SignUpDetailPage() {
               placeholder='이름'
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
+              maxLength={10}
               required
             />
             <StyledInput
