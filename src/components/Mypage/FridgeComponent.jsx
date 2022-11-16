@@ -27,18 +27,18 @@ function FridgeComponent({ lineNum }) {
 }
 
 const FridgeWrap = styled.div`
-  font-family: "nanumextra";
+  font-family: "AppleRegular";
   padding-top: 8px;
-  margin-left: 18px;
-  margin-right: 18px;
+  margin-left: 15px;
+  margin-right: 15px;
   margin-bottom: 10px;
-  height: 380px;
+  height: 320px;
 `;
 
 const FridgeCardsWrap = styled.div`
   display: flex;
   width: 100%;
-  height: 310px;
+  height: 250px;
   white-space: nowrap;
   overflow-x: scroll;
 `;
@@ -50,13 +50,16 @@ const FridgeCardWrap = styled.div`
   border-radius: 10px;
   margin: 0 10px;
   margin-left: 6px;
-  width: 180px;
-  height: 270px;
+  width: 140px;
+  height: 210px;
   box-shadow: 0px 4px 6px 0 rgb(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   img {
-    width: 100%;
-    height: 100%;
+    /* width: 100%; */
+    height: 90%;
     object-fit: cover;
   }
 `;

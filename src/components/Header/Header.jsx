@@ -14,7 +14,7 @@ function Header() {
 export default Header;
 
 const HeaderWrap = styled.div`
-  font-family: "nanumextra";
+  font-family: "AppleBold";
   padding-top: 8px;
   margin-left: 22px;
   h1 {

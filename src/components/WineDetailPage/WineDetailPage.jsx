@@ -1,45 +1,44 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
-import styled from 'styled-components';
-import Rating from '../MainPage/Rating';
-import Aroma from './Aroma';
+import React from "react";
+import { useLocation } from "react-router-dom";
+import styled from "styled-components";
+import Rating from "../MainPage/Rating";
+import Aroma from "./Aroma";
 
 function WineDetailPage() {
   const location = useLocation();
   const wine = location.state.wine;
   const wineAroma = [wine.aroma1, wine.aroma2, wine.aroma3];
 
-  let wineTypeEng = '';
-  if (wine['wineType'] === '레드') {
-    wineTypeEng = 'red'
-  } else if (wine['wineType'] === '화이트') {
-    wineTypeEng = 'white'
-  } else if (wine['wineType'] === '로제') {
-    wineTypeEng = 'rose'
+  let wineTypeEng = "";
+  if (wine["wineType"] === "레드") {
+    wineTypeEng = "red";
+  } else if (wine["wineType"] === "화이트") {
+    wineTypeEng = "white";
+  } else if (wine["wineType"] === "로제") {
+    wineTypeEng = "rose";
   } else {
-    wineTypeEng = 'sparkling'
+    wineTypeEng = "sparkling";
   }
 
   return (
     <DetailContainer>
-      <div className='wineImg'>
-        <img src={wine['wineImage']} />
+      <div className="wineImg">
+        <img src={wine["wineImage"]} />
       </div>
-      <div className='wineInfo'>
-        <p className='wineName'>{wine['wineName']}</p>
-        <p className='wineNameEng'>{wine['wineNameEng']}</p>
-        <span className={wineTypeEng}>{wine['wineType']}</span>
-        <p className='rating'>당도 : <Rating cnt={wine['wineSweet']} /></p>
-        <p className='rating'>바디 : <Rating cnt={wine['wineBody']} /></p>
-        <p className='wineAroma'>
-          {
-            wineAroma.map((aroma, idx) => (
-              <Aroma
-                key={idx}
-                aroma={aroma}
-              />
-            ))
-          }
+      <div className="wineInfo">
+        <p className="wineName">{wine["wineName"]}</p>
+        <p className="wineNameEng">{wine["wineNameEng"]}</p>
+        <span className={wineTypeEng}>{wine["wineType"]}</span>
+        <p className="rating">
+          당도 : <Rating cnt={wine["wineSweet"]} />
+        </p>
+        <p className="rating">
+          바디 : <Rating cnt={wine["wineBody"]} />
+        </p>
+        <p className="wineAroma">
+          {wineAroma.map((aroma, idx) => (
+            <Aroma key={idx} aroma={aroma} />
+          ))}
         </p>
       </div>
     </DetailContainer>
@@ -53,14 +52,14 @@ const DetailContainer = styled.div`
   .wineImg {
     padding: 15px 10px;
     border-radius: 10px;
-    border: solid 1px rgba(0,0,0,0.1);
+    border: solid 1px rgba(0, 0, 0, 0.1);
     box-shadow: 1.7px 4.7px 10px 0 rgb(0 0 0 / 15%);
     background-color: #fff;
 
     img {
-    display: block;
-    margin: auto;
-    height: 55vh;
+      display: block;
+      margin: auto;
+      height: 55vh;
     }
   }
 
@@ -68,7 +67,7 @@ const DetailContainer = styled.div`
     text-align: left;
     .wineName {
       font-size: 20px;
-      font-family: 'nanumbold';
+      font-family: "AppleBold";
       margin-bottom: 0;
     }
     .wineNameEng {
@@ -85,20 +84,20 @@ const DetailContainer = styled.div`
       padding: 8px 16px;
     }
     .red {
-      color: #FFFFFF;
+      color: #ffffff;
       background-color: #ba0e30;
     }
     .white {
-      color: '#000000';
+      color: "#000000";
       background-color: #e9e5e5;
     }
     .rose {
-      color: #FFFFFF;
-      background-color: #FA8C8C;
+      color: #ffffff;
+      background-color: #fa8c8c;
     }
     .sparkling {
       color: #000000;
-      background-color: #FFFCBB;
+      background-color: #fffcbb;
     }
   }
 

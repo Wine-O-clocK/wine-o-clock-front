@@ -54,6 +54,7 @@ const UserImgWrap = styled.div`
 `;
 
 const UserTxtWrap = styled.div`
+  font-family: "AppleLight";
   /* float: right; */
 `;
 

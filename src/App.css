@@ -1,24 +1,29 @@
 @charset "utf-8";
 
 @font-face {
-  font-family: "nanumregular";
-  src: url("./assets/fonts/NanumGothic-Regular.ttf");
+  font-family: "AppleBold";
+  src: url("./assets/fonts/AppleSDGothicNeoB.ttf");
 }
 
 @font-face {
-  font-family: "nanumbold";
-  src: url("./assets/fonts/NanumGothic-Bold.ttf");
+  font-family: "AppleMedium";
+  src: url("./assets/fonts/AppleSDGothicNeoM.ttf");
 }
 
 @font-face {
-  font-family: "nanumextra";
-  src: url("./assets/fonts/NanumGothic-ExtraBold.ttf");
+  font-family: "AppleRegular";
+  src: url("./assets/fonts/AppleSDGothicNeoR.ttf");
+}
+
+@font-face {
+  font-family: "AppleLight";
+  src: url("./assets/fonts/AppleSDGothicNeoL.ttf");
 }
 
 body {
   width: 100vw;
   margin: 0;
-  font-family: "nanumregular";
+  font-family: "AppleRegular";
 }
 
 img {
