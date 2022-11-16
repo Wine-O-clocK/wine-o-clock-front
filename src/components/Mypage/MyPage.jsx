@@ -1,3 +1,5 @@
+import React from "react";
+import styled from "styled-components";
 import BadgeComponent from "./BadgeComponent";
 import MyWineFridge from "./MyWineFridge";
 import UserInfoComponent from "./UserInfoComponent";
@@ -5,11 +7,17 @@ import UserInfoComponent from "./UserInfoComponent";
 function MyPage() {
   return (
     <>
-      <UserInfoComponent />
-      <BadgeComponent />
-      <MyWineFridge />
+      <MyPageWrap>
+        <UserInfoComponent />
+        <BadgeComponent />
+        <MyWineFridge />
+      </MyPageWrap>
     </>
   );
 }
+
+const MyPageWrap = styled.div`
+  width: 100%;
+`;
 
 export default MyPage;
