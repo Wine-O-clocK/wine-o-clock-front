@@ -18,21 +18,22 @@ function MyWineFridge() {
 }
 
 const MyWineFridgeWrap = styled.div`
-  font-family: "nanumextra";
+  font-family: "AppleMedium";
   padding-top: 8px;
-  margin-left: 22px;
-  height: 900px;
-  margin-right: 40px;
+  margin-left: 12px;
+  height: 800px;
+  margin-right: 20px;
   margin-bottom: 50px;
 `;
 
 const FridgeWrap = styled.div`
-  background-color: #e2e2e2;
+  background-color: #ececec;
   border-radius: 10px;
+  /* border: 6px solid #8d8d8d; */
   padding-top: 8px;
   margin: 5px;
   width: 100%;
-  height: 800px;
+  height: 670px;
   box-shadow: 0px 8px 10px 0 rgb(0, 0, 0, 0.2);
 `;
 
