@@ -1,7 +1,12 @@
 import React from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { LoginUserName, LoginState, LoginUserEmail, LoginUserPwd } from "../../states/LoginState";
+import {
+  LoginUserName,
+  LoginState,
+  LoginUserEmail,
+  LoginUserPwd,
+} from "../../states/LoginState";
 import { useNavigate } from "react-router-dom";
 
 function UserInfoComponent() {
@@ -16,9 +21,9 @@ function UserInfoComponent() {
     setUserName("");
     setUserLoginEmail("");
     setUserLoginPwd("");
-    navigate('/')
-  }
-  
+    navigate("/");
+  };
+
   return (
     <>
       <UserInfoWrap>
@@ -28,8 +33,10 @@ function UserInfoComponent() {
         <UserTxtWrap>
           <h3>{loginUserName}님</h3>
           <h4>회원정보 수정</h4>
-          <button className="logout" onClick={handleLogout}>로그아웃</button>
         </UserTxtWrap>
+        <button className="logout" onClick={handleLogout}>
+          로그아웃
+        </button>
       </UserInfoWrap>
     </>
   );
