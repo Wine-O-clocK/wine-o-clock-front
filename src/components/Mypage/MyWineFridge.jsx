@@ -20,9 +20,9 @@ function MyWineFridge() {
 const MyWineFridgeWrap = styled.div`
   font-family: "nanumextra";
   padding-top: 8px;
-  margin-left: 22px;
+  margin-left: 20px;
   height: 900px;
-  margin-right: 40px;
+  margin-right: 28px;
   margin-bottom: 50px;
 `;
 

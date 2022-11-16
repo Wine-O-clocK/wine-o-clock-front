@@ -21,8 +21,8 @@ function BadgeComponent() {
 const BoxWrap = styled.div`
   font-family: "nanumextra";
   padding-top: 8px;
-  margin-left: 22px;
-  margin-right: 22px;
+  margin-left: 20px;
+  /* margin-right: 5px; */
   /* width: 100vw; */
   height: 350px;
 `;
@@ -41,10 +41,11 @@ const BadgeCardWrap = styled.div`
   background-color: gray;
   border-radius: 10px;
   padding-top: 8px;
-  margin: 5px;
+  margin-left: 4px;
+  margin-right: 12px;
   width: 180px;
   height: 250px;
-  box-shadow: 0px 8px 10px 0 rgb(0, 0, 0, 0.2);
+  box-shadow: 0px 6px 10px 0 rgb(0, 0, 0, 0.2);
 `;
 
 export default BadgeComponent;

@@ -18,6 +18,8 @@ function FridgeComponent({ lineNum }) {
             />
           </FridgeCardWrap>
           <FridgeCardWrap />
+          <FridgeCardWrap />
+          <FridgeCardWrap />
         </FridgeCardsWrap>
       </FridgeWrap>
     </>
@@ -27,25 +29,30 @@ function FridgeComponent({ lineNum }) {
 const FridgeWrap = styled.div`
   font-family: "nanumextra";
   padding-top: 8px;
-  margin-left: 22px;
+  margin-left: 18px;
+  margin-right: 18px;
   margin-bottom: 10px;
   height: 380px;
 `;
 
 const FridgeCardsWrap = styled.div`
   display: flex;
-  /* white-space: nowrap;
-  overflow-x: scroll; */
+  width: 100%;
+  height: 310px;
+  white-space: nowrap;
+  overflow-x: scroll;
 `;
 
 const FridgeCardWrap = styled.div`
+  flex: 0 0 auto;
   background-color: #ffffff;
   padding: 12px 0;
   border-radius: 10px;
   margin: 0 10px;
+  margin-left: 6px;
   width: 180px;
   height: 270px;
-  box-shadow: 0px 8px 10px 0 rgb(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 6px 0 rgb(0, 0, 0, 0.2);
 
   img {
     width: 100%;
