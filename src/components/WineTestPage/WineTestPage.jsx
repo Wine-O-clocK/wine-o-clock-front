@@ -49,7 +49,9 @@ function WineTestPage() {
         </>
       ) : (
         <>
-          <WineTestResult />
+          <WineTestResultWrap>
+            <WineTestResult />
+          </WineTestResultWrap>
         </>
       )}
     </>
@@ -58,6 +60,10 @@ function WineTestPage() {
 
 const WineTestPageWrap = styled.div`
   margin-bottom: 60px;
+`;
+
+const WineTestResultWrap = styled.div`
+  height: 100vh;
 `;
 
 export default WineTestPage;

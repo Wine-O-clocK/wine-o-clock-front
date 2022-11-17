@@ -40,7 +40,7 @@ function TestMainComponent() {
 
   const navigate = useNavigate();
 
-  const onClickRestState = () => {
+  const onClickResetState = () => {
     setNowBubbleNum(0);
     setAnswerHelloNum(0);
     setAnswerFirstNum(0);
@@ -121,7 +121,7 @@ function TestMainComponent() {
               {" "}
               홈으로 돌아가기&nbsp;{<AiFillHome className="icons" />}
             </button>
-            <button onClick={onClickRestState} className="testBtn">
+            <button onClick={onClickResetState} className="testBtn">
               다시 테스트 해보기&nbsp;{<AiOutlineReload className="icons" />}
             </button>
           </>
@@ -193,6 +193,8 @@ const TestMainWrap = styled.div`
     color: #ffffff;
     font-size: 16px;
     box-shadow: 0px 2px 4px 0 rgb(0, 0, 0, 0.2);
+    align-items: center;
+    justify-content: center;
 
     animation: fadein 0.3s;
     -webkit-animation: fadein 0.3s;
