@@ -2,10 +2,11 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { AiFillHome, AiOutlineReload } from "react-icons/ai";
 import styled from "styled-components";
 import {
+  allAnswersState,
   answerFirstState,
   answerFourthState,
   answerHelloState,
@@ -17,6 +18,7 @@ import {
 import UserBubbleComponent from "./User/UserBubbleComponent";
 import WinyHelloComponent from "./Winy/WinyHelloComponent";
 import WinyQuestionComponent from "./Winy/WinyQuestionComponent";
+import WinyByeComponent from "./Winy/WinyByeComponent";
 
 function TestMainComponent() {
   const [nowBubbleNum, setNowBubbleNum] = useRecoilState(nowBubbleState);
@@ -52,7 +54,7 @@ function TestMainComponent() {
     if (answerHelloNum === 2) {
       setWantToTest(0);
     }
-  }, [answerHelloNum]);
+  }, [answerHelloNum, answerFourthNum]);
 
   const getBubbleMessage = () => {
     if (nowBubbleNum === 1) {
@@ -117,11 +119,10 @@ function TestMainComponent() {
             />
             <button onClick={() => navigate("/")} className="homeBtn">
               {" "}
-              홈으로 돌아가기 {<AiFillHome className="icons" />}
+              홈으로 돌아가기&nbsp;{<AiFillHome className="icons" />}
             </button>
             <button onClick={onClickRestState} className="testBtn">
-              {" "}
-              다시 테스트 해보기 {<AiOutlineReload className="icons" />}
+              다시 테스트 해보기&nbsp;{<AiOutlineReload className="icons" />}
             </button>
           </>
         ) : (
@@ -164,6 +165,7 @@ function TestMainComponent() {
                 )}
               </>
             )}
+            {nowBubbleNum >= 5 && <WinyByeComponent />}
           </>
         )}
       </TestMainWrap>
@@ -181,7 +183,7 @@ const TestMainWrap = styled.div`
   overflow: auto;
 
   button {
-    display: block;
+    display: flex;
     border-radius: 15px;
     background-color: #c57aea;
     border: 2px solid #c57aea;
@@ -206,17 +208,10 @@ const TestMainWrap = styled.div`
         opacity: 1;
       }
     }
-
-    .icons {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
   }
   button:hover {
     background-color: #fef2ff;
     color: #ba63e5;
-    /* font-weight: bold; */
   }
   .testBtn {
     padding: 16px 64px;

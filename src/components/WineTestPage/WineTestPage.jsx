@@ -1,8 +1,9 @@
 import React from "react";
 import { useEffect } from "react";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import {
+  allAnswersState,
   answerFirstState,
   answerFourthState,
   answerHelloState,
@@ -13,6 +14,7 @@ import {
 } from "../../states/WineTestState";
 import BottomSelectComponent from "./BottomSelectComponent";
 import TestMainComponent from "./TestMainComponent";
+import WineTestResult from "./WineTestResult";
 
 function WineTestPage() {
   const setNowBubble = useSetRecoilState(nowBubbleState);
@@ -23,6 +25,8 @@ function WineTestPage() {
   const setAnswerFourth = useSetRecoilState(answerFourthState);
   const setWantToTest = useSetRecoilState(wantToTestState);
 
+  const [allAnswers, setAllAnswers] = useRecoilState(allAnswersState);
+
   useEffect(() => {
     setNowBubble(0);
     setAnswerHello(0);
@@ -31,14 +35,23 @@ function WineTestPage() {
     setAnswerThird(0);
     setAnswerFourth(0);
     setWantToTest(1);
+    // setAllAnswers(0);
   });
 
   return (
     <>
-      <WineTestPageWrap>
-        <TestMainComponent />
-        <BottomSelectComponent />
-      </WineTestPageWrap>
+      {allAnswers === 0 ? (
+        <>
+          <WineTestPageWrap>
+            <TestMainComponent />
+            <BottomSelectComponent />
+          </WineTestPageWrap>
+        </>
+      ) : (
+        <>
+          <WineTestResult />
+        </>
+      )}
     </>
   );
 }

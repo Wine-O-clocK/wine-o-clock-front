@@ -34,3 +34,8 @@ export const wantToTestState = atom({
   key: "wantToTestState",
   default: 1,
 });
+
+export const allAnswersState = atom({
+  key: "allAnswersState",
+  default: 0,
+});
