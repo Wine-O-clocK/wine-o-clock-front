@@ -1,7 +1,9 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useNavigate } from "react-router-dom";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { AiFillHome, AiOutlineReload } from "react-icons/ai";
 import styled from "styled-components";
 import {
   answerFirstState,
@@ -10,24 +12,47 @@ import {
   answerSecondState,
   answerThirdState,
   nowBubbleState,
+  wantToTestState,
 } from "../../states/WineTestState";
 import UserBubbleComponent from "./User/UserBubbleComponent";
 import WinyHelloComponent from "./Winy/WinyHelloComponent";
 import WinyQuestionComponent from "./Winy/WinyQuestionComponent";
 
 function TestMainComponent() {
-  const nowBubbleNum = useRecoilValue(nowBubbleState);
-  const answerHelloNum = useRecoilValue(answerHelloState);
-  const answerFirstNum = useRecoilValue(answerFirstState);
-  const answerSecondNum = useRecoilValue(answerSecondState);
-  const answerThirdNum = useRecoilValue(answerThirdState);
-  const answerFourthNum = useRecoilValue(answerFourthState);
+  const [nowBubbleNum, setNowBubbleNum] = useRecoilState(nowBubbleState);
+  const [answerHelloNum, setAnswerHelloNum] = useRecoilState(answerHelloState);
+  const [answerFirstNum, setAnswerFirstNum] = useRecoilState(answerFirstState);
+  const [answerSecondNum, setAnswerSecondNum] =
+    useRecoilState(answerSecondState);
+  const [answerThirdNum, setAnswerThirdNum] = useRecoilState(answerThirdState);
+  const [answerFourthNum, setAnswerFourthNum] =
+    useRecoilState(answerFourthState);
 
   const [bubbleMessage, setBubbleMessage] = useState("");
   const [bubbleMessage1, setBubbleMessage1] = useState("");
   const [bubbleMessage2, setBubbleMessage2] = useState("");
   const [bubbleMessage3, setBubbleMessage3] = useState("");
   const [bubbleMessage4, setBubbleMessage4] = useState("");
+
+  const setWantToTest = useSetRecoilState(wantToTestState);
+
+  const navigate = useNavigate();
+
+  const onClickRestState = () => {
+    setNowBubbleNum(0);
+    setAnswerHelloNum(0);
+    setAnswerFirstNum(0);
+    setAnswerSecondNum(0);
+    setAnswerThirdNum(0);
+    setAnswerFourthNum(0);
+    setWantToTest(1);
+  };
+
+  useEffect(() => {
+    if (answerHelloNum === 2) {
+      setWantToTest(0);
+    }
+  }, [answerHelloNum]);
 
   const getBubbleMessage = () => {
     if (nowBubbleNum === 1) {
@@ -85,39 +110,59 @@ function TestMainComponent() {
             )}
           </>
         )}
-        {nowBubbleNum >= 1 && (
-          <>
-            <WinyQuestionComponent questionMessage={"누구와 함께 마셔?"} />
-            {answerFirstNum !== 0 && (
-              <UserBubbleComponent bubbleMessage={bubbleMessage1} />
-            )}
-          </>
-        )}
-        {nowBubbleNum >= 2 && (
-          <>
-            <WinyQuestionComponent questionMessage={"오늘은 어떤 날이야?"} />
-            {answerSecondNum !== 0 && (
-              <UserBubbleComponent bubbleMessage={bubbleMessage2} />
-            )}
-          </>
-        )}
-        {nowBubbleNum >= 3 && (
+        {answerHelloNum === 2 ? (
           <>
             <WinyQuestionComponent
-              questionMessage={"그렇구나! 어디서 구매할 예정이야?"}
+              questionMessage={"알겠어 .. 다음에 또 들러줘 !"}
             />
-            {answerThirdNum !== 0 && (
-              <UserBubbleComponent bubbleMessage={bubbleMessage3} />
-            )}
+            <button onClick={() => navigate("/")} className="homeBtn">
+              {" "}
+              홈으로 돌아가기 {<AiFillHome className="icons" />}
+            </button>
+            <button onClick={onClickRestState} className="testBtn">
+              {" "}
+              다시 테스트 해보기 {<AiOutlineReload className="icons" />}
+            </button>
           </>
-        )}
-        {nowBubbleNum >= 4 && (
+        ) : (
           <>
-            <WinyQuestionComponent
-              questionMessage={"가격대를 고려하는 게 좋을까?"}
-            />
-            {answerFourthNum !== 0 && (
-              <UserBubbleComponent bubbleMessage={bubbleMessage4} />
+            {nowBubbleNum >= 1 && (
+              <>
+                <WinyQuestionComponent questionMessage={"누구와 함께 마셔?"} />
+                {answerFirstNum !== 0 && (
+                  <UserBubbleComponent bubbleMessage={bubbleMessage1} />
+                )}
+              </>
+            )}
+            {nowBubbleNum >= 2 && (
+              <>
+                <WinyQuestionComponent
+                  questionMessage={"오늘은 어떤 날이야?"}
+                />
+                {answerSecondNum !== 0 && (
+                  <UserBubbleComponent bubbleMessage={bubbleMessage2} />
+                )}
+              </>
+            )}
+            {nowBubbleNum >= 3 && (
+              <>
+                <WinyQuestionComponent
+                  questionMessage={"그렇구나! 어디서 구매할 예정이야?"}
+                />
+                {answerThirdNum !== 0 && (
+                  <UserBubbleComponent bubbleMessage={bubbleMessage3} />
+                )}
+              </>
+            )}
+            {nowBubbleNum >= 4 && (
+              <>
+                <WinyQuestionComponent
+                  questionMessage={"가격대를 고려하는 게 좋을까?"}
+                />
+                {answerFourthNum !== 0 && (
+                  <UserBubbleComponent bubbleMessage={bubbleMessage4} />
+                )}
+              </>
             )}
           </>
         )}
@@ -134,6 +179,53 @@ const TestMainWrap = styled.div`
   height: calc(var(--vh, 1vh) * 100);
   /* margin-bottom: 100px; */
   overflow: auto;
+
+  button {
+    display: block;
+    border-radius: 15px;
+    background-color: #c57aea;
+    border: 2px solid #c57aea;
+    padding: 16px 72px;
+    margin: 5px auto;
+    margin-top: 30px;
+    color: #ffffff;
+    font-size: 16px;
+    box-shadow: 0px 2px 4px 0 rgb(0, 0, 0, 0.2);
+
+    animation: fadein 0.3s;
+    -webkit-animation: fadein 0.3s;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+    opacity: 0;
+
+    @keyframes fadein {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    .icons {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  button:hover {
+    background-color: #fef2ff;
+    color: #ba63e5;
+    /* font-weight: bold; */
+  }
+  .testBtn {
+    padding: 16px 64px;
+    background-color: #ba63e5;
+    border: 2px solid #ba63e5;
+    margin-top: 15px;
+  }
+  .testBtn {
+  }
 `;
 
 export default TestMainComponent;

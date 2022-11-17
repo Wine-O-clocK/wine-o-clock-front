@@ -29,3 +29,8 @@ export const answerFourthState = atom({
   key: "answerFourthState",
   default: 0,
 });
+
+export const wantToTestState = atom({
+  key: "wantToTestState",
+  default: 1,
+});
