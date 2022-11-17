@@ -1,65 +1,57 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Slider from 'react-slick';
 import styled from 'styled-components';
 import { recent_wine } from '../../recent_data';
+import { MdRefresh } from 'react-icons/md';
 
 function RecentWine() {
   const navigate = useNavigate();
-  const settings = {
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 5,
-    slidesToScroll: 5,
-    initialSlide: 0,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 5,
-          slidesToScroll: 5,
-          infinite: true,
-          dots: true
-        }
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 4,
-          initialSlide: 4
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3
-        }
-      }
-    ]
-  };
+  const [currWine, setCurrWine] = useState([]);
+  const [currIdx, setCurrIdx] = useState(0);
+
+  useEffect(() => {
+    const wineArr = recent_wine.slice(0, 3);
+    setCurrWine(wineArr);
+  }, [])
+
+  const onClickRefresh = (currIdx) => {
+    let startIdx = currIdx + 3;
+    let endIdx = startIdx  + 3;
+
+    if (endIdx > recent_wine.length) {
+      endIdx = recent_wine.length;
+    } 
+    const wineArr = recent_wine.slice(startIdx, endIdx);
+    if (endIdx === recent_wine.length) {
+      startIdx = 0;
+      endIdx = 3;
+    }
+    setCurrWine(wineArr)
+    setCurrIdx(startIdx)
+  }
 
   const onClickRecentWine = (wine) => {
     navigate(`/wine/${wine['wineNameEng']}`, {
-      state: {wine: wine}
+      state: { wine: wine }
     })
   }
 
   return (
     <RecentWineContainer>
-      <div className='title'>최신 언급 와인</div>
-      <SlideWrapper {...settings}>
-        {
-          recent_wine.map((wine, idx) => (
+      <div className='recentWineTop'>
+        <div className='title'>최신 언급 와인</div>
+        <MdRefresh className='renderBtn' size="20" onClick={() => onClickRefresh(currIdx)}/>
+      </div>
+      <div className='recentWineMain'>
+      {
+          currWine.map((wine, idx) => (
             <div className='wine' key={idx} onClick={() => onClickRecentWine(wine)}>
               <img src={wine["wineImage"]} />
               <span className='wineName'>{wine["wineName"]}</span>
             </div>
           ))
         }
-      </SlideWrapper>
+      </div>
     </RecentWineContainer>
   );
 }
@@ -67,16 +59,30 @@ function RecentWine() {
 export default RecentWine;
 
 const RecentWineContainer = styled.div`
- padding-bottom: 10px;
-  .title {
-    padding-top: 22px;
+  padding: 16px 0;
+  .recentWineTop {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 16px;
+    
+    .title {
+    padding-top: 2px;
     font-weight: bold;
+    }
+    .renderBtn {
+      cursor: pointer;
+    }
   }
-`;
 
-const SlideWrapper = styled(Slider)`
-  margin-top: 16px;
-  .wine {
+  .recentWineMain {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: row;
+
+    .wine {
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -94,7 +100,7 @@ const SlideWrapper = styled(Slider)`
       text-align: center;
     } 
   }
+  }
 `;
 
 
-  
