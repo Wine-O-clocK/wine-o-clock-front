@@ -6,6 +6,7 @@ import {
   LoginState,
   LoginUserEmail,
   LoginUserPwd,
+  LoginSocial,
 } from "../../states/LoginState";
 import { useNavigate } from "react-router-dom";
 
@@ -16,11 +17,14 @@ function UserInfoComponent() {
   const setIsLoggedIn = useSetRecoilState(LoginState);
   const setUserLoginEmail = useSetRecoilState(LoginUserEmail);
   const setUserLoginPwd = useSetRecoilState(LoginUserPwd);
+  const setLoginSocial = useSetRecoilState(LoginSocial);
+
   const handleLogout = () => {
     setIsLoggedIn(false);
     setUserName("");
     setUserLoginEmail("");
     setUserLoginPwd("");
+    setLoginSocial("");
     navigate("/");
   };
 
