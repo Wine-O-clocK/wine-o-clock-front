@@ -1,12 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
-import socialGoogle from '../../assets/img/social_google.svg';
-import socialNaver from '../../assets/img/social_naver.svg';
-import socialKakao from '../../assets/img/social_kakao.svg';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { LoginState, LoginUserEmail, LoginUserName, LoginUserPwd } from '../../states/LoginState';
+import OAuthNaver from './OAuthNaver';
+import OAuthKakao from './OAuthKakao';
+import OAuthGoogle from './OAuthGoogle';
 
 function SignInPage() {
   const navigate = useNavigate();
@@ -15,7 +15,8 @@ function SignInPage() {
   const user = {
     name: '임가비',
     id: 'abc0000@naver.com',
-    pwd: 'wine1234*'
+    pwd: 'wine1234*',
+    level: 1
   }
   
   const [email, setEmail] = useState('')
@@ -62,11 +63,14 @@ function SignInPage() {
       setUserLoginEmail(email);
       setUserLoginPwd(pwd);
       setIsLoggedIn(true);
-      navigate('/')
+      navigate('/', {
+        state: {
+          userLevel: user.level
+        }
+      })
     } else {
       alert('이메일이나 비밀번호가 일치하지 않습니다.')
     }
-
   }
 
   return (
@@ -90,9 +94,6 @@ function SignInPage() {
           onChange={onChangePwd}
           value={pwd || ''}
         />
-        {/* {
-          !confirm && <div className='error'>비밀번호가 일치하지 않습니다.</div>
-        } */}
         <button 
           onSubmit={handleSubmit}
           className={isConfirm ? 'loginBtn active' : 'loginBtn disabled'}
@@ -100,10 +101,10 @@ function SignInPage() {
         >로그인</button>
       </InputForm>
       <hr />
-      <div className='socialSignIn'>
-        <img src={socialGoogle}/>
-        <img src={socialNaver}/>
-        <img src={socialKakao}/>
+      <div className='socialLoginWrap'>
+        <OAuthGoogle/>
+        <OAuthNaver/>
+        <OAuthKakao/>
       </div>
       <div className='otherFeat'>
         <span onClick={() => navigate('/signup')}>회원가입</span>
@@ -133,7 +134,7 @@ const SignUpContainer = styled.div`
       margin: 0;
     }
   }
-  .socialSignIn {
+  .socialLoginWrap {
     display: flex;
     flex-direction: row;
     align-items: center;
