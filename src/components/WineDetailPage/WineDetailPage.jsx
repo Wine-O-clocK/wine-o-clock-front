@@ -3,11 +3,17 @@ import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Rating from "../MainPage/Rating";
 import Aroma from "./Aroma";
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
+import { useState } from "react";
+import { useRecoilValue } from "recoil";
+import { LoginState } from "../../states/LoginState";
 
 function WineDetailPage() {
   const location = useLocation();
   const wine = location.state.wine;
   const wineAroma = [wine.aroma1, wine.aroma2, wine.aroma3];
+  const isLoggedIn = useRecoilValue(LoginState);
+  const [clickHeart, setClickHeart] = useState(false);
 
   let wineTypeEng = "";
   if (wine["wineType"] === "레드") {
@@ -18,6 +24,10 @@ function WineDetailPage() {
     wineTypeEng = "rose";
   } else {
     wineTypeEng = "sparkling";
+  }
+
+  const handleHeart = () => {
+    setClickHeart((prev) => !prev);
   }
 
   return (
@@ -41,6 +51,11 @@ function WineDetailPage() {
           ))}
         </p>
       </div>
+      {isLoggedIn && 
+        <span className="wineLike" onClick={handleHeart}>
+        {clickHeart ? <AiFillHeart size="24" color="#c371ea"/> : <AiOutlineHeart size="24" color="#7c7b7b"/> }
+        </span>
+      }
     </DetailContainer>
   );
 }
@@ -48,6 +63,7 @@ function WineDetailPage() {
 export default WineDetailPage;
 
 const DetailContainer = styled.div`
+  position: relative;
   margin: 8px 20px 80px;
   .wineImg {
     padding: 15px 10px;
@@ -104,5 +120,12 @@ const DetailContainer = styled.div`
   .wineAroma {
     display: flex;
     flex-direction: row;
+  }
+  .wineLike {
+    position: absolute;
+    display: inline-block;
+    height: 24px;
+    top: 62vh;
+    right: 0;
   }
 `;
