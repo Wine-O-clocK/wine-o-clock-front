@@ -1,11 +1,19 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { LoginState, LoginUserName } from '../../states/LoginState';
 
 function LoginPermission() {
+  const location = useLocation();
   const navigate = useNavigate();
+  const [userLevel, setUserLevel] = useState(-1);
+  useEffect(() => {
+    if (location.state !== null) {
+      setUserLevel(location.state.userLevel)
+    }
+  }, [])
+
   const isLoggedIn = useRecoilValue(LoginState);
   const loginUserName = useRecoilValue(LoginUserName);
 
@@ -13,12 +21,16 @@ function LoginPermission() {
     <LoginWrapper>
       {isLoggedIn
         ? (
-          <>
-            <div><span>{loginUserName}</span>님의 취향 저격 와인<br />AI가 골라드려요!</div>
-            <button onClick={() => navigate('/signin')}>와인 추천받기</button>
-          </>
+          userLevel === 0 ?
+            <>
+              <div><span>{loginUserName}</span>님의 취향 저격 와인<br />AI가 골라드려요!</div>
+              <button onClick={() => navigate('/signup/detail')}>취향 등록하러 가기</button>
+            </>
+            : <>
+              <div><span>{loginUserName}</span>님의 취향 저격 와인<br />AI가 골라드려요!</div>
+              <button onClick={() => navigate('/signin')}>와인 추천받기</button>
+            </>
         )
-
         : (
           <>
             <div>로그인하고 나만을 위해 준비된<br />와인을 만나보세요!</div>

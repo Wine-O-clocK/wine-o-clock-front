@@ -1,9 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
-import socialGoogle from '../../assets/img/social_google.svg';
-import socialNaver from '../../assets/img/social_naver.svg';
-import socialKakao from '../../assets/img/social_kakao.svg';
 import { useNavigate } from 'react-router-dom';
 
 function SignUpPage() {
@@ -127,11 +124,6 @@ function SignUpPage() {
         </button>
       </InputForm>
       <hr />
-      <div className='socialSignUp'>
-        <img src={socialGoogle} />
-        <img src={socialNaver} />
-        <img src={socialKakao} />
-      </div>
     </SignUpContainer>
   );
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -7,8 +7,11 @@ import { wine } from '../../data';
 import CardFlip from './CardFlip';
 import LoginPermission from './LoginPermission';
 import RecentWine from './RecentWine';
+import { useRecoilValue } from 'recoil';
+import { LoginSocial } from '../../states/LoginState';
 
 function MainPage() {
+  const loginSocial = useRecoilValue(LoginSocial);
   const category = [
     { title: '이달의 와인 TOP5', value: 'mention' },
     { title: '선물하기 좋은 와인 TOP5', value: 'present' },
@@ -24,6 +27,25 @@ function MainPage() {
     slidesToScroll: 1
   };
 
+  const userAccessToken = () => {
+    loginSocial && getToken();
+  }
+
+  const getToken = () => {
+    console.log(loginSocial)
+    let token;
+    if (window.location.href.includes('access_token')) {
+      token = window.location.href.split('=')[1].split('&')[0];
+    } else if (window.location.href.includes('code')) {
+      token = new URL(document.location).searchParams.get('code')
+    } else token = 'wine'
+    console.log(token)
+  }
+
+  useEffect(() => {
+    userAccessToken()
+  }, [loginSocial])
+  
   return (
     <MainContainer>
       <LoginPermission/>
