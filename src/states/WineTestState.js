@@ -29,3 +29,23 @@ export const answerFourthState = atom({
   key: "answerFourthState",
   default: 0,
 });
+
+export const wantToTestState = atom({
+  key: "wantToTestState",
+  default: 1,
+});
+
+export const allAnswersState = atom({
+  key: "allAnswersState",
+  default: 0,
+});
+
+export const wineTestCodeState = atom({
+  key: "wineTestCodeState",
+  default: 0,
+});
+
+export const wineTestResultState = atom({
+  key: "wineTestResultState",
+  default: null,
+});
