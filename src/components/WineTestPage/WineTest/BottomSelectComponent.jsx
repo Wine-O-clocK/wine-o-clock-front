@@ -9,7 +9,7 @@ import {
   answerThirdState,
   nowBubbleState,
   wantToTestState,
-} from "../../states/WineTestState";
+} from "../../../states/WineTestState";
 
 function BottomSelectComponent() {
   const [nowBubbleNum, setNowBubbleNum] = useRecoilState(nowBubbleState);

@@ -12,9 +12,9 @@ import {
   nowBubbleState,
   wantToTestState,
 } from "../../states/WineTestState";
-import BottomSelectComponent from "./BottomSelectComponent";
-import TestMainComponent from "./TestMainComponent";
-import WineTestResult from "./WineTestResult";
+import BottomSelectComponent from "./WineTest/BottomSelectComponent";
+import TestMainComponent from "./WineTest/TestMainComponent";
+import WineTestResult from "./WineResult/WineTestResult";
 
 function WineTestPage() {
   const setNowBubble = useSetRecoilState(nowBubbleState);

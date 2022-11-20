@@ -2,8 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { allAnswersState } from "../../../states/WineTestState";
-
+import { allAnswersState } from "../../../../states/WineTestState";
 function WinyByeComponent() {
   const setAllAnswers = useSetRecoilState(allAnswersState);
 

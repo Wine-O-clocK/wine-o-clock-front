@@ -6,7 +6,6 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 import { AiFillHome, AiOutlineReload } from "react-icons/ai";
 import styled from "styled-components";
 import {
-  allAnswersState,
   answerFirstState,
   answerFourthState,
   answerHelloState,
@@ -14,11 +13,15 @@ import {
   answerThirdState,
   nowBubbleState,
   wantToTestState,
-} from "../../states/WineTestState";
+  wineTestCodeState,
+  wineTestResultState,
+} from "../../../states/WineTestState";
 import UserBubbleComponent from "./User/UserBubbleComponent";
 import WinyHelloComponent from "./Winy/WinyHelloComponent";
 import WinyQuestionComponent from "./Winy/WinyQuestionComponent";
 import WinyByeComponent from "./Winy/WinyByeComponent";
+import { wine_test_data } from "../../../wine_test_data";
+import GetResultWine from "../WineResult/GetResultWine";
 
 function TestMainComponent() {
   const [nowBubbleNum, setNowBubbleNum] = useRecoilState(nowBubbleState);
@@ -37,6 +40,7 @@ function TestMainComponent() {
   const [bubbleMessage4, setBubbleMessage4] = useState("");
 
   const setWantToTest = useSetRecoilState(wantToTestState);
+  const setWineTestCode = useSetRecoilState(wineTestCodeState);
 
   const navigate = useNavigate();
 
@@ -49,10 +53,30 @@ function TestMainComponent() {
     setAnswerFourthNum(0);
     setWantToTest(1);
   };
-
+  const [wineTestResult, setWineTestResult] =
+    useRecoilState(wineTestResultState);
+  const getResultWine = ({ wine }) => {
+    console.log(wine.wineCode);
+    if (wine.wineCode === "1111") {
+      setWineTestResult(wine);
+    }
+  };
   useEffect(() => {
     if (answerHelloNum === 2) {
       setWantToTest(0);
+    }
+    if (answerFourthNum !== 0) {
+      setWineTestCode(1111);
+      wine_test_data.map((wine) => {
+        getResultWine({ wine });
+        // console.log(wine.wineCode);
+        // if (wine.wineCode === "1111") {
+        //   // console.log(wine);
+        //   setWineTestResult(wine);
+        // }
+        // console.log(wineTestResult);
+        // <GetResultWine wine={wine} setWineTestResult={setWineTestResult} />;
+      });
     }
   }, [answerHelloNum, answerFourthNum]);
 

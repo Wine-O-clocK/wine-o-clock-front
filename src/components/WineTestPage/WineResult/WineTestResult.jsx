@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { AiFillHome, AiOutlineReload } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import {
   allAnswersState,
   answerFirstState,
@@ -12,7 +12,9 @@ import {
   answerThirdState,
   nowBubbleState,
   wantToTestState,
-} from "../../states/WineTestState";
+  wineTestResultState,
+} from "../../../states/WineTestState";
+import WineResultInfo from "./WineResultInfo";
 
 function WineTestResult() {
   const navigate = useNavigate();
@@ -37,20 +39,26 @@ function WineTestResult() {
     setAllAnswers(0);
   };
 
+  const wineTestResult = useRecoilValue(wineTestResultState);
+
   return (
     <>
-      <WineTestResultWrap>
-        <ResultBoxWrap></ResultBoxWrap>
-        <ButtonWrap>
-          <button onClick={() => navigate("/")} className="homeBtn">
-            {" "}
-            홈으로 돌아가기&nbsp;{<AiFillHome className="icons" />}
-          </button>
-          <button onClick={onClickResetState} className="testBtn">
-            다시 테스트 해보기&nbsp;{<AiOutlineReload className="icons" />}
-          </button>
-        </ButtonWrap>
-      </WineTestResultWrap>
+      {wineTestResult && (
+        <WineTestResultWrap>
+          <ResultBoxWrap>
+            <WineResultInfo wineTestResult={wineTestResult} />
+          </ResultBoxWrap>
+          <ButtonWrap>
+            <button onClick={() => navigate("/")} className="homeBtn">
+              {" "}
+              홈으로 돌아가기&nbsp;{<AiFillHome className="icons" />}
+            </button>
+            <button onClick={onClickResetState} className="testBtn">
+              다시 테스트 해보기&nbsp;{<AiOutlineReload className="icons" />}
+            </button>
+          </ButtonWrap>
+        </WineTestResultWrap>
+      )}
     </>
   );
 }
@@ -58,9 +66,10 @@ function WineTestResult() {
 const WineTestResultWrap = styled.div`
   /* background-color: #c371ea; */
   background: linear-gradient(to bottom, #c77aea, #b255dd);
-  height: 100vh;
+  height: 120vh;
   padding: 0;
   padding-top: 30px;
+  padding-bottom: 50px;
 `;
 
 const ResultBoxWrap = styled.div`
@@ -68,7 +77,8 @@ const ResultBoxWrap = styled.div`
   border-radius: 15px;
   /* border: 6px solid #8d8d8d; */
   margin: 0 22px;
-  height: 500px;
+  /* height: 500px; */
+  padding: 20px 0;
   box-shadow: 0px 8px 10px 0 rgb(0, 0, 0, 0.2);
 `;
 
