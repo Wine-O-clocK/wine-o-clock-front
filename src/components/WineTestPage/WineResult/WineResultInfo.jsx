@@ -1,17 +1,9 @@
 import React from "react";
 import { useEffect } from "react";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { wineTestResultState } from "../../../states/WineTestState";
-import { wine_test_data } from "../../../wine_test_data";
-import GetResultWine from "./GetResultWine";
 import WineAroma from "./WineAroma";
 
 function WineResultInfo({ wineTestResult }) {
-  useEffect(() => {
-    // console.log(wineTestResult);
-  });
-
   let wineTypeEng = "";
   if (wineTestResult.wineType === "레드") {
     wineTypeEng = "red";

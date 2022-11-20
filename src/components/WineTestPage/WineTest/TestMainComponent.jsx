@@ -21,7 +21,6 @@ import WinyHelloComponent from "./Winy/WinyHelloComponent";
 import WinyQuestionComponent from "./Winy/WinyQuestionComponent";
 import WinyByeComponent from "./Winy/WinyByeComponent";
 import { wine_test_data } from "../../../wine_test_data";
-import GetResultWine from "../WineResult/GetResultWine";
 
 function TestMainComponent() {
   const [nowBubbleNum, setNowBubbleNum] = useRecoilState(nowBubbleState);
@@ -69,13 +68,6 @@ function TestMainComponent() {
       setWineTestCode(1111);
       wine_test_data.map((wine) => {
         getResultWine({ wine });
-        // console.log(wine.wineCode);
-        // if (wine.wineCode === "1111") {
-        //   // console.log(wine);
-        //   setWineTestResult(wine);
-        // }
-        // console.log(wineTestResult);
-        // <GetResultWine wine={wine} setWineTestResult={setWineTestResult} />;
       });
     }
   }, [answerHelloNum, answerFourthNum]);
