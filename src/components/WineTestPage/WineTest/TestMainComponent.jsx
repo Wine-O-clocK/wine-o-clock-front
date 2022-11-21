@@ -13,7 +13,6 @@ import {
   answerThirdState,
   nowBubbleState,
   wantToTestState,
-  wineTestCodeState,
   wineTestResultState,
 } from "../../../states/WineTestState";
 import UserBubbleComponent from "./User/UserBubbleComponent";
@@ -39,6 +38,7 @@ function TestMainComponent() {
   const [bubbleMessage4, setBubbleMessage4] = useState("");
 
   const setWantToTest = useSetRecoilState(wantToTestState);
+  const setWineTestResult = useSetRecoilState(wineTestResultState);
 
   const navigate = useNavigate();
 
@@ -51,8 +51,7 @@ function TestMainComponent() {
     setAnswerFourthNum(0);
     setWantToTest(1);
   };
-  const [wineTestResult, setWineTestResult] =
-    useRecoilState(wineTestResultState);
+
   const getResultWine = ({ wine, code }) => {
     console.log(code);
     if (wine.wineCode === String(code)) {
