@@ -39,7 +39,6 @@ function TestMainComponent() {
   const [bubbleMessage4, setBubbleMessage4] = useState("");
 
   const setWantToTest = useSetRecoilState(wantToTestState);
-  const setWineTestCode = useSetRecoilState(wineTestCodeState);
 
   const navigate = useNavigate();
 
@@ -54,9 +53,9 @@ function TestMainComponent() {
   };
   const [wineTestResult, setWineTestResult] =
     useRecoilState(wineTestResultState);
-  const getResultWine = ({ wine }) => {
-    console.log(wine.wineCode);
-    if (wine.wineCode === "1111") {
+  const getResultWine = ({ wine, code }) => {
+    console.log(code);
+    if (wine.wineCode === String(code)) {
       setWineTestResult(wine);
     }
   };
@@ -65,9 +64,13 @@ function TestMainComponent() {
       setWantToTest(0);
     }
     if (answerFourthNum !== 0) {
-      setWineTestCode(1111);
+      const code =
+        answerFirstNum * 1000 +
+        answerSecondNum * 100 +
+        answerThirdNum * 10 +
+        answerFourthNum;
       wine_test_data.map((wine) => {
-        getResultWine({ wine });
+        getResultWine({ wine, code });
       });
     }
   }, [answerHelloNum, answerFourthNum]);

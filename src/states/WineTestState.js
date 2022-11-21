@@ -40,11 +40,6 @@ export const allAnswersState = atom({
   default: 0,
 });
 
-export const wineTestCodeState = atom({
-  key: "wineTestCodeState",
-  default: 0,
-});
-
 export const wineTestResultState = atom({
   key: "wineTestResultState",
   default: null,
