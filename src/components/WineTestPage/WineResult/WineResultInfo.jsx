@@ -86,8 +86,8 @@ const WineInfoWrap = styled.div`
     background-color: #ba0e30;
   }
   .white {
-    color: "#000000";
-    background-color: #e9e5e5;
+    color: #ffffff;
+    background-color: #808ee8;
   }
   .rose {
     color: #ffffff;

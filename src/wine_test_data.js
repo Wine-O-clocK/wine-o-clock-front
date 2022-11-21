@@ -2,6 +2,41 @@ export const wine_test_data = [
   {
     wineCode: "1111",
     wineImage:
+      "https://wine21.speedgabia.com/WINE_MST/TITLE/0162000/W0162238.jpg",
+    wineName: "도멘 생 미셸, 브뤼 로제",
+    wineNameEng: "Domaine Ste. Michelle, Brut Rose",
+    wineType: "스파클링",
+    wineAlcohol: "13",
+    winePrice: 4,
+    wineSweet: 1,
+    wineBody: 4,
+    wineVariety: "블렌디드",
+    aroma1: "베리",
+    aroma2: "사과",
+    aroma3: " ",
+    wineText: "우울한 당신을 위로해줄 달콤한 스파클링 와인!",
+  },
+  {
+    wineCode: "1112",
+    wineImage:
+      "https://wine21.speedgabia.com/WINE_MST/TITLE/0165000/W0165820.jpg",
+    wineName: "피에르 가이야르, 비오니에",
+    wineNameEng: "Pierre Gaillard, Viognier",
+    wineType: "화이트",
+    wineAlcohol: "12",
+    winePrice: 7,
+    wineSweet: 1,
+    wineBody: 3,
+    wineVariety: "비오니에",
+    aroma1: "꽃",
+    aroma2: "돌",
+    aroma3: "사과",
+    wineText:
+      "크고 둥근 자갈 밭에서 자란 비오니에는 미네랄 성분을 갖고 있으면서 흰 꽃과 복숭아, 살구의 아로마를 갖고 있다. 특유의 낮은 산도와 무거운 느낌이 오늘 당신의 우울함을 달래줄 수 있지 않을까?",
+  },
+  {
+    wineCode: "1121",
+    wineImage:
       "https://wine21.speedgabia.com/WINE_MST/TITLE/0159000/W0159028.jpg",
     wineName: "오이스터 베이 소비뇽 블랑",
     wineNameEng: "Oyster Bay Sauvignon Blanc",
@@ -18,7 +53,7 @@ export const wine_test_data = [
       "집에서 혼자 마시는 와인이 좋은 이유는 상대와 속도를 맞춰 마시지 않아도 되고, 마음대로 집어먹을 수 있는 안주가 있고, 언제든 취해 드러누울 수 있는 침대가 있기 때문. 그러니까 이 한 병을 비울 때만큼은 그 무엇이든지 내 마음대로 해도 되기 때문이다. 한 잔씩 잔이 채워지고 병을 비워갈 때쯤엔 아까 기분이 어땠는지 지나간 마음이 어땠는지 조금도 생각나지 않을 것이다. 기분이 좀 그렇다면, 재밌는 넷플릭스를 틀어두고 화이트 와인 한 병 어떨까?",
   },
   {
-    wineCode: "1112",
+    wineCode: "1122",
     wineImage:
       "https://wine21.speedgabia.com/WINE_MST/TITLE/0158000/W0158106.jpg",
     wineName: "샤또 샤스 스플린",
@@ -53,6 +88,24 @@ export const wine_test_data = [
     wineText: "부담없는 스타일과 뛰어난 접근성을 가진 낙낙 레드 블랜드",
   },
   {
+    wineCode: "1212",
+    wineImage:
+      "https://wine21.speedgabia.com/WINE_MST/TITLE/0146000/W0146881.jpg",
+    wineName: "산테로, 안젤리 로쏘",
+    wineNameEng: "Santero, Angeli Rosso",
+    wineType: "스파클링",
+    wineAlcohol: "7",
+    winePrice: 4,
+    wineSweet: 4,
+    wineBody: 3,
+    wineVariety: "브라케토",
+    aroma1: "베리",
+    aroma2: " ",
+    aroma3: " ",
+    wineText:
+      "천사의 와인, 천사의 입맞춤이라는 별명을 가진 레드 스파클링와인. 보통 스파클링와인들은 화이트 또는 로제 와인으로 만들어지는 경우가 대부분인데, 안젤리 로쏘 와인의 경우 레드 스파클링 와인이라는 특별함을 가지고 있죠. 레드와인의 떫은 맛은 줄이고 달콤한 맛과 상큼한 산딸기 향이 느껴지는 달달 상큼한 와인으로 나만의 파티를 즐겨보는 건 어떨까요?",
+  },
+  {
     wineCode: "1221",
     wineImage:
       "https://wine21.speedgabia.com/WINE_MST/TITLE/0162000/W0162076.jpg",
@@ -71,6 +124,60 @@ export const wine_test_data = [
       "이태리 통일 150주년을 기념해 출시한 와인이다. 이태리 동서남북 각각의 지역을 대표하는 포도품종 4가지가 블렌딩 되어있어 더욱 풍부한 맛을 즐길 수 있다. 딸기와 라즈베리, 붉은 체리의 신선한 맛이 살아있지만 산미도 적당하고, 은근한 바디감도 느껴지는 조화로운 맛이다. 가격대가 다른 와인에 비해서 조금 있는 편이지만, 데일리로 즐기기에 좋은 와인으로 평가 받고 있다. 예쁜 병 디자인에 와인 오프너도 필요 없으니 자취러에게 강력 추천!",
   },
   {
+    wineCode: "1222",
+    wineImage:
+      "https://wine21.speedgabia.com/WINE_MST/TITLE/0166000/W0166838.jpg",
+    wineName: "마리에따, 크리스토",
+    wineNameEng: "Marietta, Christo",
+    wineType: "레드",
+    wineAlcohol: "15 - 16",
+    winePrice: 7,
+    wineSweet: 1,
+    wineBody: 5,
+    wineVariety: "블렌디드",
+    aroma1: "꽃",
+    aroma2: "베리",
+    aroma3: "숙성",
+    wineText:
+      "향긋한 블랙베리의 과일 향과 스파이시한 허브 향, 짙은 다크 초콜릿 향, 제비꽃향과 함께 나만의 파티를 즐겨보는 건 어떨까요?",
+  },
+  {
+    wineCode: "1311",
+    wineImage:
+      "https://wine21.speedgabia.com/WINE_MST/TITLE/0162000/W0162386.jpg",
+    wineName: "프레시넷, 미아 로제",
+    wineNameEng: "Frexienet, Mia Rose",
+    wineType: "로제",
+    wineAlcohol: "11 - 12",
+    winePrice: 1,
+    wineSweet: 1,
+    wineBody: 3,
+    wineVariety: "보발",
+    aroma1: "사과",
+    aroma2: "베리",
+    aroma3: "꽃",
+    wineText:
+      "진한 딸기와 라즈베리의 달콤한 풍미와 함께 퇴근 후 나만의 시간을 가져보는 건 어떨까요?",
+  },
+  {
+    wineCode: "1312",
+    wineImage:
+      "https://wine21.speedgabia.com/WINE_MST/TITLE/0147000/W0147912.jpg",
+    wineName: "클라우디 베이, 소비뇽 블랑",
+    wineNameEng: "Cloudy Bay, Sauvignon Blanc",
+    wineType: "화이트",
+    wineAlcohol: "14",
+    winePrice: 5,
+    wineSweet: 1,
+    wineBody: 2,
+    wineVariety: "소비뇽 블랑",
+    aroma1: "레몬",
+    aroma2: " ",
+    aroma3: " ",
+    wineText:
+      "몸은 피곤하지만 조금 더 오늘 하루를 즐기고 싶은 날엔, 클라우디 베이 소비뇽 블랑으로 피로를 날려버리는 것 어떨까?",
+  },
+  {
     wineCode: "1321",
     wineImage:
       "https://wine21.speedgabia.com/WINE_MST/TITLE/0169000/W0169886.png",
@@ -87,6 +194,24 @@ export const wine_test_data = [
     aroma3: "레몬",
     wineText:
       "퇴근 후 가볍게 화이트 와인 한 잔 어때 ? 전세계 판매 1위 보르도 와인 무똥까데 브랜드의 베스트 셀링 와인으로 와린이도 쉽게 즐길 수 있는 데일리 화이트 와인",
+  },
+  {
+    wineCode: "1322",
+    wineImage:
+      "https://wine21.speedgabia.com/WINE_MST/TITLE/0153000/W0153809.jpg",
+    wineName: "알비제이, 시알러지컴",
+    wineNameEng: "RBJ Theologicum",
+    wineType: "레드",
+    wineAlcohol: "15 - 16",
+    winePrice: 7,
+    wineSweet: 1,
+    wineBody: 4,
+    wineVariety: "블렌디드",
+    aroma1: "사과",
+    aroma2: "시나몬",
+    aroma3: "오크통",
+    wineText:
+      "혼술을 한다고 하면 고독해 보일 수도 있지만, 번거롭게 마음 맞는 사람을 찾지 않고 내가 좋아하는 술을 집중하며 즐길 수 있어 좋아요. 이 와인이라면 퇴근 후 당신의 혼술 시간을 더 빛내줄 것 같네요. 붉은 과실 향이 부드럽게 스치고 지나가면, 다양한 향신료의 풍미가 섬세하게 느껴질거에요. 시간이 지나면서 더 복합적이고 새로운 매력들을 발산하는데, 시간을 두고 천천히 음미해보는 건 어떨까요?",
   },
   {
     wineCode: "1411",
@@ -123,6 +248,42 @@ export const wine_test_data = [
     aroma3: "오크통",
     wineText:
       "세계 최초로 프로세코 스파클링을 생산한 와이너리인 카르페네 말볼티의 프로세코 스파클링 와인 중 복합미와 과일향이 뛰어난 와인",
+  },
+  {
+    wineCode: "1421",
+    wineImage:
+      "https://wine21.speedgabia.com/WINE_MST/TITLE/0170000/W0170452.png",
+    wineName: "플라네타, 로제",
+    wineNameEng: "Planeta, Rose",
+    wineType: "로제",
+    wineAlcohol: "12",
+    winePrice: 2,
+    wineSweet: 2,
+    wineBody: 2,
+    wineVariety: "블렌디드",
+    aroma1: "꽃",
+    aroma2: "베리",
+    aroma3: "사과",
+    wineText:
+      "오늘 나에게 복숭아처럼 달콤한 과즙 맛과 짜릿한 산미를 선물하는건 어떨까요?",
+  },
+  {
+    wineCode: "1422",
+    wineImage:
+      "https://wine21.speedgabia.com/WINE_MST/TITLE/0162000/W0162235.jpg",
+    wineName: "1865 셀렉티드 빈야드 피노 누아",
+    wineNameEng: "1865 Selected Vineyard Pinot Noir",
+    wineType: "레드",
+    wineAlcohol: "14 - 15",
+    winePrice: 6,
+    wineSweet: 1,
+    wineBody: 4,
+    wineVariety: "피노 누아",
+    aroma1: "돌",
+    aroma2: "베리",
+    aroma3: "사과",
+    wineText:
+      "오늘 나를 위해 빨간 띠를 두른 레드 와인, 1865 피노 누아를 선물하는 건 어떨끼요?",
   },
   {
     wineCode: "2111",
