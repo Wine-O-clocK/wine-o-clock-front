@@ -103,7 +103,7 @@ function TestMainComponent() {
       }
     } else if (nowBubbleNum === 4) {
       if (answerThirdNum === 1) {
-        setBubbleMessage3("편의점에서 가볍게 🏪");
+        setBubbleMessage3("도수가 낮은 와인이면 좋겠어 🍹");
       } else if (answerThirdNum === 2) {
         setBubbleMessage3("딱히 상관없어 🤷🏻‍♀️");
       }
@@ -166,7 +166,7 @@ function TestMainComponent() {
             {nowBubbleNum >= 3 && (
               <>
                 <WinyQuestionComponent
-                  questionMessage={"그렇구나! 어디서 구매할 예정이야?"}
+                  questionMessage={"그렇구나! 와인의 도수는 어떤게 좋을까?"}
                 />
                 {answerThirdNum !== 0 && (
                   <UserBubbleComponent bubbleMessage={bubbleMessage3} />
