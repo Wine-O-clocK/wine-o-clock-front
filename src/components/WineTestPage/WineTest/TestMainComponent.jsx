@@ -13,7 +13,6 @@ import {
   answerThirdState,
   nowBubbleState,
   wantToTestState,
-  wineTestCodeState,
   wineTestResultState,
 } from "../../../states/WineTestState";
 import UserBubbleComponent from "./User/UserBubbleComponent";
@@ -39,7 +38,7 @@ function TestMainComponent() {
   const [bubbleMessage4, setBubbleMessage4] = useState("");
 
   const setWantToTest = useSetRecoilState(wantToTestState);
-  const setWineTestCode = useSetRecoilState(wineTestCodeState);
+  const setWineTestResult = useSetRecoilState(wineTestResultState);
 
   const navigate = useNavigate();
 
@@ -52,11 +51,10 @@ function TestMainComponent() {
     setAnswerFourthNum(0);
     setWantToTest(1);
   };
-  const [wineTestResult, setWineTestResult] =
-    useRecoilState(wineTestResultState);
-  const getResultWine = ({ wine }) => {
-    console.log(wine.wineCode);
-    if (wine.wineCode === "1111") {
+
+  const getResultWine = ({ wine, code }) => {
+    console.log(code);
+    if (wine.wineCode === String(code)) {
       setWineTestResult(wine);
     }
   };
@@ -65,9 +63,13 @@ function TestMainComponent() {
       setWantToTest(0);
     }
     if (answerFourthNum !== 0) {
-      setWineTestCode(1111);
+      const code =
+        answerFirstNum * 1000 +
+        answerSecondNum * 100 +
+        answerThirdNum * 10 +
+        answerFourthNum;
       wine_test_data.map((wine) => {
-        getResultWine({ wine });
+        getResultWine({ wine, code });
       });
     }
   }, [answerHelloNum, answerFourthNum]);
@@ -101,7 +103,7 @@ function TestMainComponent() {
       }
     } else if (nowBubbleNum === 4) {
       if (answerThirdNum === 1) {
-        setBubbleMessage3("편의점에서 가볍게 🏪");
+        setBubbleMessage3("도수가 낮은 와인이면 좋겠어 🍹");
       } else if (answerThirdNum === 2) {
         setBubbleMessage3("딱히 상관없어 🤷🏻‍♀️");
       }
@@ -164,7 +166,7 @@ function TestMainComponent() {
             {nowBubbleNum >= 3 && (
               <>
                 <WinyQuestionComponent
-                  questionMessage={"그렇구나! 어디서 구매할 예정이야?"}
+                  questionMessage={"그렇구나! 와인의 도수는 어떤게 좋을까?"}
                 />
                 {answerThirdNum !== 0 && (
                   <UserBubbleComponent bubbleMessage={bubbleMessage3} />

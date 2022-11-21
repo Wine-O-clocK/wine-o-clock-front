@@ -126,7 +126,7 @@ function BottomSelectComponent() {
                     setNowBubbleNum(4);
                   }}
                 >
-                  편의점에서 가볍게 🏪
+                  도수가 낮은 와인이면 좋겠어 🍹
                 </button>
                 <button
                   onClick={() => {

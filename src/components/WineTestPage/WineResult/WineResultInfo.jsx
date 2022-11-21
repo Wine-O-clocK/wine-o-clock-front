@@ -1,5 +1,4 @@
 import React from "react";
-import { useEffect } from "react";
 import styled from "styled-components";
 import WineAroma from "./WineAroma";
 
@@ -23,7 +22,7 @@ function WineResultInfo({ wineTestResult }) {
   return (
     <>
       <WineResultInfoWrap>
-        {/* <p></p> */}
+        <p>당신을 위한 오늘의 와인은 ..</p>
         <WineNameWrap>" {wineTestResult.wineName} "</WineNameWrap>
         <WineImgWrap>
           <img src={wineTestResult.wineImage} alt="aaa" />
@@ -39,12 +38,7 @@ function WineResultInfo({ wineTestResult }) {
             ))}
           </p>
         </WineInfoWrap>
-        <WineTxtWrap>
-          영화 &lt;악마는 프라다를 입는다(2007)&gt;. 잡지사를 다니는 주인공
-          '앤디(앤 해서웨이)'가 퇴근 후 남자친구와 함께 마시는 와인이 '루피노
-          리제르바 두칼레'입니다. 실제로 뉴욕에서 가장 많이 팔릴 만큼 뉴요커들이
-          사랑하는 와인으로 잘 알려져 있죠.
-        </WineTxtWrap>
+        <WineTxtWrap>{wineTestResult.wineText}</WineTxtWrap>
       </WineResultInfoWrap>
     </>
   );
@@ -92,8 +86,8 @@ const WineInfoWrap = styled.div`
     background-color: #ba0e30;
   }
   .white {
-    color: "#000000";
-    background-color: #e9e5e5;
+    color: #ffffff;
+    background-color: #808ee8;
   }
   .rose {
     color: #ffffff;
