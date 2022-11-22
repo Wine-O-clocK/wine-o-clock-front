@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header/Header";
 import MainPage from "./components/MainPage/MainPage";
+import WineRecommendPage from "./components/MainPage/WineRecommendPage";
 import MyPage from "./components/Mypage/MyPage";
 import Navigation from "./components/Navigation/Navigation";
 import WineTestPage from "./components/WineTestPage/WineTestPage";
@@ -23,6 +24,7 @@ function App() {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signup/detail" element={<SignUpDetail />} />
+        <Route path="/winerecommendpage" element={<WineRecommendPage />} />
         <Route path="/search" element={<Search />} />
         <Route path="/winetestpage" element={<WineTestPage />} />
         <Route path="/mypage" element={<MyPage />} />

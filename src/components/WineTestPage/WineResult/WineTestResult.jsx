@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { AiFillHome, AiOutlineReload } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import {
   allAnswersState,
   answerFirstState,
@@ -97,18 +97,12 @@ const ButtonWrap = styled.div`
     align-items: center;
     justify-content: center;
   }
-  /* button:hover {
-    background-color: #fef2ff;
-    color: #ba63e5;
-  } */
   .testBtn {
     padding: 16px 100px;
     background-color: #f0b8ff;
     border: 2px solid #f0b8ff;
     margin-top: 15px;
   }
-  /* .testBtn {
-  } */
 `;
 
 export default WineTestResult;
