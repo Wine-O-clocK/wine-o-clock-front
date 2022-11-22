@@ -12,7 +12,7 @@ function SearchPage() {
   const [isConfirm, setIsConfirm] = useState(false);
 
   useEffect(() => {
-    if (selectedType !== -1 && selectedPrice !== -1 && selectedAroma !== -1) {
+    if (selectedType !== -1 || selectedPrice !== -1 || selectedAroma.length !== 0) {
       setIsConfirm(true);
     }
   }, [selectedType, selectedPrice, selectedAroma])
@@ -82,7 +82,6 @@ function SearchPage() {
                     value={type.value}
                     onChange={(e) => setSelectedType(Number(e.target.value))}
                     checked={idx === selectedType}
-                    required
                   />
                   <span className='btn filter'
                     style={{
@@ -107,7 +106,6 @@ function SearchPage() {
                     value={price.value}
                     onChange={(e) => setSelectedPrice(Number(e.target.value))}
                     checked={idx === selectedPrice}
-                    required
                   />
                   <span className='btn filter'
                     style={{
