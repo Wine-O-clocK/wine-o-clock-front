@@ -9,6 +9,7 @@ import LoginPermission from './LoginPermission';
 import RecentWine from './RecentWine';
 import { useRecoilValue } from 'recoil';
 import { LoginSocial } from '../../states/LoginState';
+import SpecialWine from './SpecialWine';
 
 function MainPage() {
   const loginSocial = useRecoilValue(LoginSocial);
@@ -50,6 +51,7 @@ function MainPage() {
     <MainContainer>
       <LoginPermission/>
       <RecentWine/>
+      <SpecialWine/>
       <SlideContainer>
         {
           category.map((c, idx) => {
@@ -89,6 +91,7 @@ const SlideContainer = styled.div`
 `;
 
 const SlideWrapper = styled(Slider)`
+  position: relative;
   display: flex;
   flex-direction: row;
   border-radius: 25px;
@@ -102,6 +105,7 @@ const SlideWrapper = styled(Slider)`
     content: '';
   }
   .slick-dots {
-    padding-top: 16px;
+    position: absolute;
+    bottom: -35px;
   }
 `;
