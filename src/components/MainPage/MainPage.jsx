@@ -89,6 +89,7 @@ const SlideContainer = styled.div`
 `;
 
 const SlideWrapper = styled(Slider)`
+  position: relative;
   display: flex;
   flex-direction: row;
   border-radius: 25px;
@@ -102,6 +103,7 @@ const SlideWrapper = styled(Slider)`
     content: '';
   }
   .slick-dots {
-    padding-top: 16px;
+    position: absolute;
+    bottom: -35px;
   }
 `;
