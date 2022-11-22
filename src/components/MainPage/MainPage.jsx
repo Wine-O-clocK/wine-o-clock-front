@@ -9,6 +9,7 @@ import LoginPermission from './LoginPermission';
 import RecentWine from './RecentWine';
 import { useRecoilValue } from 'recoil';
 import { LoginSocial } from '../../states/LoginState';
+import SpecialWine from './SpecialWine';
 
 function MainPage() {
   const loginSocial = useRecoilValue(LoginSocial);
@@ -50,6 +51,7 @@ function MainPage() {
     <MainContainer>
       <LoginPermission/>
       <RecentWine/>
+      <SpecialWine/>
       <SlideContainer>
         {
           category.map((c, idx) => {
