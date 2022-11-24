@@ -7,11 +7,17 @@ import { wine } from '../../data';
 import CardFlip from './CardFlip';
 import LoginPermission from './LoginPermission';
 import RecentWine from './RecentWine';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { LoginSocial } from '../../states/LoginState';
 import SpecialWine from './SpecialWine';
+import { useLocation } from 'react-router-dom';
+import { PathState } from '../../states/MainState';
 
 function MainPage() {
+  const location = useLocation();
+  const setPathState = useSetRecoilState(PathState);
+  setPathState(location.pathname)
+  
   const loginSocial = useRecoilValue(LoginSocial);
   const category = [
     { title: '이달의 와인 TOP5', value: 'mention' },

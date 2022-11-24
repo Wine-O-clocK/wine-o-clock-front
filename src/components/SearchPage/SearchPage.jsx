@@ -1,11 +1,18 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
+import { PathState } from '../../states/MainState';
 import AromaType from '../SignUpPage/AromaType';
 import * as Styled from '../styles/input.style';
 
 function SearchPage() {
+  const location = useLocation();
+  const setPathState = useSetRecoilState(PathState);
+  setPathState(location.pathname);
+
   const [selectedType, setSelectedType] = useState(-1);
   const [selectedPrice, setSelectedPrice] = useState(-1);
   const [selectedAroma, setSelectedAroma] = useState([]);
