@@ -1,7 +1,12 @@
 import { atom } from "recoil";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 export const PathState = atom({
   key: `PathState/${uuidv4()}`,
-  default: '/',
+  default: "/",
+});
+
+export const wineLoadingState = atom({
+  key: "wineLoadingState",
+  default: 0,
 });

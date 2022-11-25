@@ -1,29 +1,53 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { AiFillHome, AiOutlineReload } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../../assets/img/spinner.gif";
 import RecommendWineInfo from "./RecommendWineInfo";
+import { useRecoilState } from "recoil";
+import { wineLoadingState } from "../../states/MainState";
 
 function WineRecommendPage() {
   const navigate = useNavigate();
+  const [wineLoading, setWineLoading] = useRecoilState(wineLoadingState);
+  useEffect(() => {
+    setTimeout(() => setWineLoading(1), 3000);
+  });
+
   return (
     <>
-      {/* <h3>AI가 당신의 취향을 분석 중입니다!</h3>
-      <img src={Spinner} alt="로딩중" /> */}
       <WineRecommendWrap>
-        <ResultBoxWrap>
-          <RecommendWineInfo />
-        </ResultBoxWrap>
-        <ButtonWrap>
-          <button onClick={() => navigate("/")} className="homeBtn">
-            {" "}
-            홈으로 돌아가기&nbsp;{<AiFillHome className="icons" />}
-          </button>
-          <button className="testBtn">
-            다시 테스트 해보기&nbsp;{<AiOutlineReload className="icons" />}
-          </button>
-        </ButtonWrap>
+        {wineLoading ? (
+          <>
+            <ResultBoxWrap>
+              <RecommendWineInfo />
+            </ResultBoxWrap>
+            <ButtonWrap>
+              <button
+                onClick={() => {
+                  setWineLoading(0);
+                  navigate("/");
+                }}
+                className="homeBtn"
+              >
+                {" "}
+                홈으로 돌아가기&nbsp;{<AiFillHome className="icons" />}
+              </button>
+              <button className="testBtn">
+                다시 테스트 해보기&nbsp;{<AiOutlineReload className="icons" />}
+              </button>
+            </ButtonWrap>
+          </>
+        ) : (
+          <>
+            <WineLoadingWrap>
+              <ResultBoxWrap>
+                <h3>AI가 당신의 취향을 분석 중입니다!</h3>
+                <img src={Spinner} alt="로딩중" />
+              </ResultBoxWrap>
+            </WineLoadingWrap>
+          </>
+        )}
       </WineRecommendWrap>
     </>
   );
@@ -31,11 +55,20 @@ function WineRecommendPage() {
 
 const WineRecommendWrap = styled.div`
   /* background-color: #c371ea; */
-  background: linear-gradient(to bottom, #c77aea, #b255dd);
+  background: linear-gradient(to bottom, #f8e49d, #ffa83d);
   height: 120vh;
   padding: 0;
   padding-top: 30px;
   padding-bottom: 50px;
+`;
+
+const WineLoadingWrap = styled.div`
+  text-align: center;
+
+  img {
+    width: 150px;
+    margin: 30px 0;
+  }
 `;
 
 const ResultBoxWrap = styled.div`
@@ -52,8 +85,8 @@ const ButtonWrap = styled.div`
   button {
     display: flex;
     border-radius: 15px;
-    background-color: #f9e3ff;
-    border: 2px solid #f9e3ff;
+    background-color: #fff6e3;
+    border: 2px solid #fff6e3;
     padding: 16px 110px;
     margin: 5px auto;
     margin-top: 30px;
@@ -63,10 +96,13 @@ const ButtonWrap = styled.div`
     align-items: center;
     justify-content: center;
   }
+  button:hover {
+    border: 2px solid #ffb066;
+  }
   .testBtn {
     padding: 16px 100px;
-    background-color: #f0b8ff;
-    border: 2px solid #f0b8ff;
+    background-color: #ffe6b5;
+    border: 2px solid #ffe6b5;
     margin-top: 15px;
   }
 `;
