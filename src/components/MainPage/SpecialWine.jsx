@@ -62,7 +62,7 @@ const SpecialWineContainer = styled.div`
     font-weight: bold;
   }
   .specialWineMain {
-    margin: 0 4px;
+    margin: 0;
     margin-top: 16px;
     display: flex;
     flex-direction: row;

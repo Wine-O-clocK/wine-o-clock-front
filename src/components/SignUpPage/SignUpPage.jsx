@@ -1,27 +1,29 @@
-import React from 'react';
-import { useState } from 'react';
-import styled from 'styled-components';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { PathState } from '../../states/MainState';
-import { useSetRecoilState } from 'recoil';
+import React, { useEffect } from "react";
+import { useState } from "react";
+import styled from "styled-components";
+import { useLocation, useNavigate } from "react-router-dom";
+import { PathState } from "../../states/MainState";
+import { useSetRecoilState } from "recoil";
 
 function SignUpPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const setPathState = useSetRecoilState(PathState);
-  setPathState(location.pathname);
+  useEffect(() => {
+    setPathState(location.pathname);
+  });
 
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState("");
   const [isEmail, setIsEmail] = useState(false);
-  const [emailMessage, setEmailMessage] = useState('');
+  const [emailMessage, setEmailMessage] = useState("");
 
-  const [pwd, setPwd] = useState('');
+  const [pwd, setPwd] = useState("");
   const [isPwd, setIsPwd] = useState(false);
-  const [pwdMessage, setPwdMessage] = useState('');
+  const [pwdMessage, setPwdMessage] = useState("");
 
-  const [confirmPwd, setConfirmPwd] = useState('');
+  const [confirmPwd, setConfirmPwd] = useState("");
   const [isPwdConfirm, setIsPwdConfirm] = useState(false);
-  const [pwdConfirmMessage, setPwdConfirmMessage] = useState('');
+  const [pwdConfirmMessage, setPwdConfirmMessage] = useState("");
 
   const [isConfirm, setIsConfirm] = useState(false);
 
@@ -32,13 +34,13 @@ function SignUpPage() {
     const emailCurrent = e.target.value;
     setEmail(emailCurrent);
     if (!emailRegex.test(emailCurrent)) {
-      setEmailMessage('잘못된 이메일 형식입니다.');
+      setEmailMessage("잘못된 이메일 형식입니다.");
       setIsEmail(false);
     } else {
-      setEmailMessage('올바른 이메일 형식입니다.');
+      setEmailMessage("올바른 이메일 형식입니다.");
       setIsEmail(true);
     }
-  }
+  };
 
   const onChangePwd = (e) => {
     e.preventDefault();
@@ -47,26 +49,26 @@ function SignUpPage() {
     setPwd(pwdCurrent);
 
     if (!pwdRegex.test(pwdCurrent)) {
-      setPwdMessage('숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요.');
+      setPwdMessage("숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요.");
       setIsPwd(false);
     } else {
-      setPwdMessage('안전한 비밀번호입니다.');
+      setPwdMessage("안전한 비밀번호입니다.");
       setIsPwd(true);
     }
-  }
+  };
 
   const onChangeConfirmPwd = (e) => {
     e.preventDefault();
     const pwdConfirm = e.target.value;
-    let confirmResult = '';
+    let confirmResult = "";
     setConfirmPwd(pwdConfirm);
 
     if (pwd === pwdConfirm) {
-      setPwdConfirmMessage('비밀번호가 일치합니다.');
+      setPwdConfirmMessage("비밀번호가 일치합니다.");
       setIsPwdConfirm(true);
       confirmResult = true;
     } else {
-      setPwdConfirmMessage('비밀번호가 일치하지 않습니다.');
+      setPwdConfirmMessage("비밀번호가 일치하지 않습니다.");
       setIsPwdConfirm(false);
       confirmResult = false;
     }
@@ -76,53 +78,57 @@ function SignUpPage() {
     } else {
       setIsConfirm(false);
     }
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isEmail && isPwd && isPwdConfirm) {
-      navigate('/signup/detail', {
+      navigate("/signup/detail", {
         state: {
           email: email,
-          pwd: pwd
-        }
+          pwd: pwd,
+        },
       });
     }
-  }
+  };
 
   return (
     <SignUpContainer>
-      <div className='titleWrap'>
+      <div className="titleWrap">
         <h3>회원가입</h3>
       </div>
       <InputForm onSubmit={handleSubmit}>
         <StyledInput
-          type='text'
-          className='email'
-          placeholder='이메일'
+          type="text"
+          className="email"
+          placeholder="이메일"
           onChange={(e) => onChangeEmail(e)}
-          value={email || ''}
+          value={email || ""}
         />
-        <div className={isEmail ? 'confirmMessage' : 'error'}>{emailMessage}</div>
+        <div className={isEmail ? "confirmMessage" : "error"}>
+          {emailMessage}
+        </div>
         <StyledInput
-          type='password'
-          className='pwd'
-          placeholder='비밀번호'
+          type="password"
+          className="pwd"
+          placeholder="비밀번호"
           onChange={(e) => onChangePwd(e)}
-          value={pwd || ''}
+          value={pwd || ""}
         />
-        <div className={isPwd ? 'confirmMessage' : 'error'}>{pwdMessage}</div>
+        <div className={isPwd ? "confirmMessage" : "error"}>{pwdMessage}</div>
         <StyledInput
-          type='password'
-          className='pwd'
-          placeholder='비밀번호 확인'
+          type="password"
+          className="pwd"
+          placeholder="비밀번호 확인"
           onChange={(e) => onChangeConfirmPwd(e)}
-          value={confirmPwd || ''}
+          value={confirmPwd || ""}
         />
-        <div className={isPwdConfirm ? 'confirmMessage' : 'error'}>{pwdConfirmMessage}</div>
+        <div className={isPwdConfirm ? "confirmMessage" : "error"}>
+          {pwdConfirmMessage}
+        </div>
         <button
           onSubmit={handleSubmit}
-          className={isConfirm ? 'nextBtn active' : 'nextBtn disabled'}
+          className={isConfirm ? "nextBtn active" : "nextBtn disabled"}
           disabled={!isConfirm ? true : false}
         >
           다음으로 넘어가기
@@ -184,32 +190,32 @@ const InputForm = styled.form`
   input:focus {
     outline: none;
   }
-  
+
   .nextBtn {
     height: 45px;
     border-radius: 5px;
-    border: 1px solid #9F9F9F;
+    border: 1px solid #9f9f9f;
     color: #333333;
     margin-bottom: 16px;
   }
   .active {
-    background-color: #9F9F9F;
-    color: #FFFFFF;
+    background-color: #9f9f9f;
+    color: #ffffff;
     font-weight: bold;
   }
   .active:active {
-    transform : translateY(0.5px);
+    transform: translateY(0.5px);
   }
   .disabled {
-    background-color: #CDCDCD;
+    background-color: #cdcdcd;
   }
-`
+`;
 const StyledInput = styled.input`
   height: 45px;
   border-radius: 5px;
-  border: 1px solid #8D8D8D;
-  color: #8D8D8D;
-  background-color: #FAFAFA;
+  border: 1px solid #8d8d8d;
+  color: #8d8d8d;
+  background-color: #fafafa;
   margin-bottom: 8px;
   padding: 0 10px;
-`
+`;

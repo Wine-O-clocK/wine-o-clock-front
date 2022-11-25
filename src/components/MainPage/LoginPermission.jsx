@@ -60,7 +60,7 @@ function LoginPermission() {
 export default LoginPermission;
 
 const LoginWrapper = styled.div`
-  height: 66px;
+  height: 76px;
   border-radius: 25px;
   background-color: #c57aea;
   box-shadow: 4px 8px 10px 0 rgba(0, 0, 0, 0.2);
@@ -77,6 +77,7 @@ const LoginWrapper = styled.div`
     outline: none;
     cursor: pointer;
     padding: 8px 22px;
+    margin-top: 6px;
     font-weight: bold;
   }
 

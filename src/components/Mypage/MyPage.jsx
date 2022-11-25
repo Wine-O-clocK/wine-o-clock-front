@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
@@ -10,7 +10,9 @@ import UserInfoComponent from "./UserInfoComponent";
 function MyPage() {
   const location = useLocation();
   const setPathState = useSetRecoilState(PathState);
-  setPathState(location.pathname);
+  useEffect(() => {
+    setPathState(location.pathname);
+  });
   return (
     <>
       <MyPageWrap>

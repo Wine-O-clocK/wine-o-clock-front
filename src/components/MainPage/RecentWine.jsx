@@ -85,7 +85,7 @@ const RecentWineContainer = styled.div`
   }
 
   .recentWineMain {
-    margin: 0 4px;
+    margin: 0;
     margin-top: 16px;
     display: flex;
     flex-direction: row;

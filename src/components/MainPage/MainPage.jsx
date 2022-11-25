@@ -16,7 +16,7 @@ import { PathState, wineLoadingState } from "../../states/MainState";
 function MainPage() {
   const location = useLocation();
   const setPathState = useSetRecoilState(PathState);
-  setPathState(location.pathname);
+
   const setWineLoading = useSetRecoilState(wineLoadingState);
   const loginSocial = useRecoilValue(LoginSocial);
   const category = [
@@ -54,6 +54,7 @@ function MainPage() {
   }, [loginSocial]);
 
   useEffect(() => {
+    setPathState(location.pathname);
     setWineLoading(0);
   }, []);
 
@@ -94,6 +95,7 @@ const SlideContainer = styled.div`
   padding-bottom: 100px;
 
   .title {
+    margin-top: 40px;
     padding-top: 22px;
     font-weight: bold;
   }
