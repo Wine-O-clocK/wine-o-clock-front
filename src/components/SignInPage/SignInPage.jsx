@@ -1,33 +1,40 @@
-import React from 'react';
-import { useState } from 'react';
-import styled from 'styled-components';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
-import { LoginState, LoginUserEmail, LoginUserName, LoginUserPwd } from '../../states/LoginState';
-import OAuthNaver from './OAuthNaver';
-import OAuthKakao from './OAuthKakao';
-import OAuthGoogle from './OAuthGoogle';
-import { PathState } from '../../states/MainState';
+import React, { useEffect } from "react";
+import { useState } from "react";
+import styled from "styled-components";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import {
+  LoginState,
+  LoginUserEmail,
+  LoginUserName,
+  LoginUserPwd,
+} from "../../states/LoginState";
+import OAuthNaver from "./OAuthNaver";
+import OAuthKakao from "./OAuthKakao";
+import OAuthGoogle from "./OAuthGoogle";
+import { PathState } from "../../states/MainState";
 
 function SignInPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const setPathState = useSetRecoilState(PathState);
-  setPathState(location.pathname);
+  useEffect(() => {
+    setPathState(location.pathname);
+  });
 
   // 사용자 임시 계정
   const user = {
-    name: '임가비',
-    id: 'abc0000@naver.com',
-    pwd: 'wine1234*',
-    level: 1
-  }
-  
-  const [email, setEmail] = useState('')
+    name: "임가비",
+    id: "abc0000@naver.com",
+    pwd: "wine1234*",
+    level: 1,
+  };
+
+  const [email, setEmail] = useState("");
   const [isEmail, setIsEmail] = useState(false);
-  const [emailMessage, setEmailMessage] = useState('');
-  const [pwd, setPwd] = useState('');
-  const [isConfirm, setIsConfirm] = useState(false);  // 유효성 검사
+  const [emailMessage, setEmailMessage] = useState("");
+  const [pwd, setPwd] = useState("");
+  const [isConfirm, setIsConfirm] = useState(false); // 유효성 검사
 
   // 상태 저장
   const setIsLoggedIn = useSetRecoilState(LoginState);
@@ -42,13 +49,13 @@ function SignInPage() {
     const emailCurrent = e.target.value;
     setEmail(emailCurrent);
     if (!emailRegex.test(emailCurrent)) {
-      setEmailMessage('이메일 형식으로 입력해주세요.');
+      setEmailMessage("이메일 형식으로 입력해주세요.");
       setIsEmail(false);
     } else {
       setEmailMessage("");
       setIsEmail(true);
     }
-  }
+  };
 
   const onChangePwd = (e) => {
     e.preventDefault();
@@ -58,7 +65,7 @@ function SignInPage() {
     } else {
       setIsConfirm(false);
     }
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -67,51 +74,55 @@ function SignInPage() {
       setUserLoginEmail(email);
       setUserLoginPwd(pwd);
       setIsLoggedIn(true);
-      navigate('/', {
+      navigate("/", {
         state: {
-          userLevel: user.level
-        }
-      })
+          userLevel: user.level,
+        },
+      });
     } else {
-      alert('이메일이나 비밀번호가 일치하지 않습니다.')
+      alert("이메일이나 비밀번호가 일치하지 않습니다.");
     }
-  }
+  };
 
   return (
     <SignUpContainer>
-      <div className='titleWrap'>
+      <div className="titleWrap">
         <h3>로그인</h3>
       </div>
       <InputForm onSubmit={handleSubmit}>
         <StyledInput
-          type='text'
-          className='email'
-          placeholder='이메일'
+          type="text"
+          className="email"
+          placeholder="이메일"
           onChange={onChangeEmail}
-          value={email || ''}
+          value={email || ""}
         />
-        <div className={isEmail ? 'confirmMessage' : 'error'}>{emailMessage}</div>
+        <div className={isEmail ? "confirmMessage" : "error"}>
+          {emailMessage}
+        </div>
         <StyledInput
-          type='password'
-          className='pwd'
-          placeholder='비밀번호'
+          type="password"
+          className="pwd"
+          placeholder="비밀번호"
           onChange={onChangePwd}
-          value={pwd || ''}
+          value={pwd || ""}
         />
-        <button 
+        <button
           onSubmit={handleSubmit}
-          className={isConfirm ? 'loginBtn active' : 'loginBtn disabled'}
+          className={isConfirm ? "loginBtn active" : "loginBtn disabled"}
           disabled={!isConfirm ? true : false}
-        >로그인</button>
+        >
+          로그인
+        </button>
       </InputForm>
       <hr />
-      <div className='socialLoginWrap'>
-        <OAuthGoogle/>
-        <OAuthNaver/>
-        <OAuthKakao/>
+      <div className="socialLoginWrap">
+        <OAuthGoogle />
+        <OAuthNaver />
+        <OAuthKakao />
       </div>
-      <div className='otherFeat'>
-        <span onClick={() => navigate('/signup')}>회원가입</span>
+      <div className="otherFeat">
+        <span onClick={() => navigate("/signup")}>회원가입</span>
         <span>비밀번호 찾기</span>
       </div>
     </SignUpContainer>
@@ -151,7 +162,7 @@ const SignUpContainer = styled.div`
     align-items: center;
     justify-content: space-around;
 
-    color: #4F4F4F;
+    color: #4f4f4f;
     font-size: 13px;
   }
 `;
@@ -179,33 +190,33 @@ const InputForm = styled.form`
   input:focus {
     outline: none;
   }
-  
+
   .loginBtn {
-  height: 45px;
-  border-radius: 5px;
-  border: 1px solid #9F9F9F;
-  background-color: #CDCDCD;
-  color: #333333;
-  margin-bottom: 16px;
+    height: 45px;
+    border-radius: 5px;
+    border: 1px solid #9f9f9f;
+    background-color: #cdcdcd;
+    color: #333333;
+    margin-bottom: 16px;
   }
   .active {
-    background-color: #9F9F9F;
-    color: #FFFFFF;
+    background-color: #9f9f9f;
+    color: #ffffff;
     font-weight: bold;
   }
   .active:active {
-    transform : translateY(0.5px);
+    transform: translateY(0.5px);
   }
   .disabled {
-    background-color: #CDCDCD;
+    background-color: #cdcdcd;
   }
-`
+`;
 const StyledInput = styled.input`
   height: 45px;
   border-radius: 5px;
-  border: 1px solid #8D8D8D;
-  color: #8D8D8D;
-  background-color: #FAFAFA;
+  border: 1px solid #8d8d8d;
+  color: #8d8d8d;
+  background-color: #fafafa;
   margin-bottom: 8px;
   padding: 0 10px;
-`
+`;

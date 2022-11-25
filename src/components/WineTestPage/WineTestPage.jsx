@@ -21,7 +21,6 @@ import { PathState } from "../../states/MainState";
 function WineTestPage() {
   const location = useLocation();
   const setPathState = useSetRecoilState(PathState);
-  setPathState(location.pathname);
 
   const setNowBubble = useSetRecoilState(nowBubbleState);
   const setAnswerHello = useSetRecoilState(answerHelloState);
@@ -42,6 +41,7 @@ function WineTestPage() {
     setAnswerFourth(0);
     setWantToTest(1);
     // setAllAnswers(0);
+    setPathState(location.pathname);
   });
 
   return (

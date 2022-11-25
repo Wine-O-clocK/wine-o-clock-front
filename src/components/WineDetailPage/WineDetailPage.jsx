@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Rating from "../MainPage/Rating";
 import Aroma from "./Aroma";
-import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { LoginState } from "../../states/LoginState";
@@ -16,7 +16,9 @@ function WineDetailPage() {
   const isLoggedIn = useRecoilValue(LoginState);
   const [clickHeart, setClickHeart] = useState(false);
   const setPathState = useSetRecoilState(PathState);
-  setPathState(location.pathname);
+  useEffect(() => {
+    setPathState(location.pathname);
+  });
 
   let wineTypeEng = "";
   if (wine["wineType"] === "레드") {
@@ -31,7 +33,7 @@ function WineDetailPage() {
 
   const handleHeart = () => {
     setClickHeart((prev) => !prev);
-  }
+  };
 
   return (
     <DetailContainer>
@@ -55,11 +57,15 @@ function WineDetailPage() {
           ))}
         </p>
       </div>
-      {isLoggedIn && 
+      {isLoggedIn && (
         <span className="wineLike" onClick={handleHeart}>
-        {clickHeart ? <AiFillHeart size="24" color="#c371ea"/> : <AiOutlineHeart size="24" color="#7c7b7b"/> }
+          {clickHeart ? (
+            <AiFillHeart size="24" color="#c371ea" />
+          ) : (
+            <AiOutlineHeart size="24" color="#7c7b7b" />
+          )}
         </span>
-      }
+      )}
     </DetailContainer>
   );
 }
@@ -109,7 +115,7 @@ const DetailContainer = styled.div`
     }
     .white {
       color: #ffffff;
-    background-color: #808ee8;
+      background-color: #808ee8;
     }
     .rose {
       color: #ffffff;
@@ -121,7 +127,7 @@ const DetailContainer = styled.div`
     }
     .winePrice {
       margin-left: 8px;
-      border: 1px solid #8D8D8D;
+      border: 1px solid #8d8d8d;
     }
   }
 

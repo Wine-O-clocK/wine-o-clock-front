@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { AiFillHome, AiOutlineReload } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import {
   allAnswersState,
   answerFirstState,
@@ -15,6 +15,7 @@ import {
   wineTestResultState,
 } from "../../../states/WineTestState";
 import WineResultInfo from "./WineResultInfo";
+import KakaoShare from "./KakaoShare";
 
 function WineTestResult() {
   const navigate = useNavigate();
@@ -48,6 +49,13 @@ function WineTestResult() {
           <ResultBoxWrap>
             <WineResultInfo wineTestResult={wineTestResult} />
           </ResultBoxWrap>
+          <ShareWrap>
+            <KakaoShare
+              _sub={"나의 와인은"}
+              _title={wineTestResult.wineName}
+              _imageUrl={wineTestResult.wineImage}
+            />
+          </ShareWrap>
           <ButtonWrap>
             <button onClick={() => navigate("/")} className="homeBtn">
               {" "}
@@ -66,7 +74,7 @@ function WineTestResult() {
 const WineTestResultWrap = styled.div`
   /* background-color: #c371ea; */
   background: linear-gradient(to bottom, #c77aea, #b255dd);
-  height: 120vh;
+  height: 140vh;
   padding: 0;
   padding-top: 30px;
   padding-bottom: 50px;
@@ -79,6 +87,17 @@ const ResultBoxWrap = styled.div`
   margin: 0 22px;
   /* height: 500px; */
   padding: 20px 0;
+  box-shadow: 0px 8px 10px 0 rgb(0, 0, 0, 0.2);
+`;
+
+const ShareWrap = styled.div`
+  background-color: #ffffff;
+  border-radius: 10px;
+  /* border: 6px solid #8d8d8d; */
+  margin: 0 80px;
+  margin-top: 35px;
+  /* height: 500px; */
+  padding: 4px;
   box-shadow: 0px 8px 10px 0 rgb(0, 0, 0, 0.2);
 `;
 
@@ -97,18 +116,12 @@ const ButtonWrap = styled.div`
     align-items: center;
     justify-content: center;
   }
-  /* button:hover {
-    background-color: #fef2ff;
-    color: #ba63e5;
-  } */
   .testBtn {
     padding: 16px 100px;
     background-color: #f0b8ff;
     border: 2px solid #f0b8ff;
     margin-top: 15px;
   }
-  /* .testBtn {
-  } */
 `;
 
 export default WineTestResult;
