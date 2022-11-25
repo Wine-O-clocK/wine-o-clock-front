@@ -7,56 +7,55 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { LoginState } from "../../states/LoginState";
+import { PathState } from "../../states/MainState";
+import { useEffect } from "react";
 
 function Navigation() {
   const navigate = useNavigate();
-  const [active, setActice] = useState(1);
+  const pathState = useRecoilValue(PathState);
+  const [path, setPath] = useState("")
   const isLoggedIn = useRecoilValue(LoginState);
+
+  useEffect(() => {
+    setPath(pathState)
+  }, [pathState])
+
   if (window.location.pathname === "/winetestpage") return null;
+
   return (
     <NavContainer>
       <div className="navigation">
         <NavButton
-          onClick={() => {
-            setActice(1);
-            navigate("/");
-          }}
+          onClick={() => {navigate("/");}}
         >
           <AiOutlineHome
-            className={active === 1 ? "nav-item active" : "nav-item"}
+            size="24"
+            className={path === '/' ? "nav-item active" : "nav-item"}
           />
-          <span>홈</span>
         </NavButton>
         <NavButton
-          onClick={() => {
-            setActice(2);
-            navigate("/search");
-          }}
+          onClick={() => {navigate("/search");}}
         >
-          <AiOutlineSearch
-            className={active === 2 ? "nav-item active" : "nav-item"}
+          <AiOutlineSearch 
+            size="24"
+            className={path === '/search' ? "nav-item active" : "nav-item"}
           />
-          <span>검색</span>
         </NavButton>
         <NavButton
-          onClick={() => {
-            setActice(3);
-            navigate("/winetestpage");
-          }}
+          onClick={() => {navigate("/winetestpage");}}
         >
-          <MdWineBar
-            className={active === 3 ? "nav-item active" : "nav-item"}
+          <MdWineBar 
+            size="24"
+            className={path === '/winetestpage' ? "nav-item active" : "nav-item"}
           />
-          <span>테스트</span>
         </NavButton>
         <NavButton
-          onClick={() => {
-            setActice(4);
-            isLoggedIn ? navigate("/mypage") : navigate("/signin");
-          }}
+          onClick={() => {isLoggedIn ? navigate("/mypage") : navigate("/signin");}}
         >
-          <BiUser className={active === 4 ? "nav-item active" : "nav-item"} />
-          <span>마이페이지</span>
+          <BiUser 
+            size="24" 
+            className={path === (isLoggedIn ? '/mypage' : '/signin') ? "nav-item active" : "nav-item"}
+          />
         </NavButton>
       </div>
     </NavContainer>
@@ -92,7 +91,6 @@ const NavButton = styled.div`
 
   .nav-item {
     color: #9f9f9f;
-    font-size: 22px;
   }
   .active {
     color: #9e4dc4;

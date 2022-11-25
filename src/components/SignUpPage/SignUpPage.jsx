@@ -1,10 +1,15 @@
 import React from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { PathState } from '../../states/MainState';
+import { useSetRecoilState } from 'recoil';
 
 function SignUpPage() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const setPathState = useSetRecoilState(PathState);
+  setPathState(location.pathname);
 
   const [email, setEmail] = useState('')
   const [isEmail, setIsEmail] = useState(false);

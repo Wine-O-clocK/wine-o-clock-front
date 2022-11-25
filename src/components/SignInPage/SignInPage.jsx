@@ -1,15 +1,19 @@
 import React from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { LoginState, LoginUserEmail, LoginUserName, LoginUserPwd } from '../../states/LoginState';
 import OAuthNaver from './OAuthNaver';
 import OAuthKakao from './OAuthKakao';
 import OAuthGoogle from './OAuthGoogle';
+import { PathState } from '../../states/MainState';
 
 function SignInPage() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const setPathState = useSetRecoilState(PathState);
+  setPathState(location.pathname);
 
   // 사용자 임시 계정
   const user = {

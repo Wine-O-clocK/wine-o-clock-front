@@ -6,7 +6,16 @@ import { special_wine } from "../../special_data";
 
 function SpecialWine() {
   const navigate = useNavigate();
-  const wineCnt = special_wine.length;
+  const month = new Date().getMonth() + 1;
+  const specialWine = special_wine[String(month)];
+  const wineCnt = specialWine.length;
+  const special = {
+    1: "새해",
+    2: "발렌타인데이",
+    3: "화이트데이",
+    11: "빼빼로데이",
+    12: "크리스마스",
+  };
   const [wineArr, setWineArr] = useState([]);
   let wineIdxArr = [];
 
@@ -27,19 +36,16 @@ function SpecialWine() {
 
   return (
     <SpecialWineContainer>
-      <div className="title">크리스마스 스페셜 와인 🎄</div>
-      {/* <SpecialWineLineWrap></SpecialWineLineWrap> */}
+      <div className="title">{special[month]} 스페셜 와인</div>
       <div className="specialWineMain">
         {wineArr.map((wineIdx, idx) => (
           <div
             className="wine"
             key={idx}
-            onClick={() => onClickSpecialWine(special_wine[wineIdx])}
+            onClick={() => onClickSpecialWine(specialWine[wineIdx])}
           >
-            <img src={special_wine[wineIdx]["wineImage"]} />
-            <span className="wineName">
-              {special_wine[wineIdx]["wineName"]}
-            </span>
+            <img src={specialWine[wineIdx]["wineImage"]} />
+            <span className="wineName">{specialWine[wineIdx]["wineName"]}</span>
           </div>
         ))}
       </div>

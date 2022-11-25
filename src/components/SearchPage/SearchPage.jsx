@@ -1,18 +1,25 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
+import { PathState } from '../../states/MainState';
 import AromaType from '../SignUpPage/AromaType';
 import * as Styled from '../styles/input.style';
 
 function SearchPage() {
+  const location = useLocation();
+  const setPathState = useSetRecoilState(PathState);
+  setPathState(location.pathname);
+
   const [selectedType, setSelectedType] = useState(-1);
   const [selectedPrice, setSelectedPrice] = useState(-1);
   const [selectedAroma, setSelectedAroma] = useState([]);
   const [isConfirm, setIsConfirm] = useState(false);
 
   useEffect(() => {
-    if (selectedType !== -1 && selectedPrice !== -1 && selectedAroma !== -1) {
+    if (selectedType !== -1 || selectedPrice !== -1 || selectedAroma.length !== 0) {
       setIsConfirm(true);
     }
   }, [selectedType, selectedPrice, selectedAroma])
@@ -82,7 +89,6 @@ function SearchPage() {
                     value={type.value}
                     onChange={(e) => setSelectedType(Number(e.target.value))}
                     checked={idx === selectedType}
-                    required
                   />
                   <span className='btn filter'
                     style={{
@@ -107,7 +113,6 @@ function SearchPage() {
                     value={price.value}
                     onChange={(e) => setSelectedPrice(Number(e.target.value))}
                     checked={idx === selectedPrice}
-                    required
                   />
                   <span className='btn filter'
                     style={{
