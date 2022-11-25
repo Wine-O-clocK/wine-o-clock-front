@@ -15,8 +15,14 @@ import {
 import BottomSelectComponent from "./WineTest/BottomSelectComponent";
 import TestMainComponent from "./WineTest/TestMainComponent";
 import WineTestResult from "./WineResult/WineTestResult";
+import { useLocation } from "react-router-dom";
+import { PathState } from "../../states/MainState";
 
 function WineTestPage() {
+  const location = useLocation();
+  const setPathState = useSetRecoilState(PathState);
+  setPathState(location.pathname);
+
   const setNowBubble = useSetRecoilState(nowBubbleState);
   const setAnswerHello = useSetRecoilState(answerHelloState);
   const setAnswerFirst = useSetRecoilState(answerFirstState);

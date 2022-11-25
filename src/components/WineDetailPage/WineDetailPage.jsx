@@ -5,8 +5,9 @@ import Rating from "../MainPage/Rating";
 import Aroma from "./Aroma";
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import { useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { LoginState } from "../../states/LoginState";
+import { PathState } from "../../states/MainState";
 
 function WineDetailPage() {
   const location = useLocation();
@@ -14,6 +15,8 @@ function WineDetailPage() {
   const wineAroma = [wine.aroma1, wine.aroma2, wine.aroma3];
   const isLoggedIn = useRecoilValue(LoginState);
   const [clickHeart, setClickHeart] = useState(false);
+  const setPathState = useSetRecoilState(PathState);
+  setPathState(location.pathname);
 
   let wineTypeEng = "";
   if (wine["wineType"] === "레드") {
@@ -39,6 +42,7 @@ function WineDetailPage() {
         <p className="wineName">{wine["wineName"]}</p>
         <p className="wineNameEng">{wine["wineNameEng"]}</p>
         <span className={wineTypeEng}>{wine["wineType"]}</span>
+        <span className="winePrice">{wine["winePrice"]}만원대</span>
         <p className="rating">
           당도 : <Rating cnt={wine["wineSweet"]} />
         </p>
@@ -114,6 +118,10 @@ const DetailContainer = styled.div`
     .sparkling {
       color: #000000;
       background-color: #fffcbb;
+    }
+    .winePrice {
+      margin-left: 8px;
+      border: 1px solid #8D8D8D;
     }
   }
 

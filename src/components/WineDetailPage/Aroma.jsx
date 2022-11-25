@@ -7,7 +7,7 @@ function Aroma({ aroma }) {
         aroma !== ' ' && <span style={{
           borderRadius: '5px',
           padding: '6px 16px,',
-          border: '1px solid #8D8D8D',
+          backgroundColor: "#e3e3e3",
           marginRight: '8px'
         }}>{aroma}</span>
       }

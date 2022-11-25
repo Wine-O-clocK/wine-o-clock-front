@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
+import { PathState } from '../../states/MainState';
 import AromaType from './AromaType';
 import WineType from './WineType';
 
 function SignUpDetailPage() {
   const location = useLocation();
+  const setPathState = useSetRecoilState(PathState);
+  setPathState(location.pathname);
   const [userName, setUserName] = useState('');
   const [userBirth, setUserBirth] = useState('');
 
