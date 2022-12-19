@@ -23,7 +23,9 @@ function CardFlip({ wine }) {
         <FrontWrap>
           <div className='card'>
             <img src={wine["wineImage"]} />
-            <span className='wineName'>{wine["wineName"]}</span>
+            <div className='wineNameWrap'>
+              <span className='wineName'>{wine["wineName"]}</span>
+            </div>
           </div>
         </FrontWrap>
         <BackWrap>
@@ -33,8 +35,8 @@ function CardFlip({ wine }) {
               <span>{wine["wineName"]}</span>
               <span>{wine["wineType"]}</span>
               {/* <span className={wineTypeEng(wineType)}>{wine["wineType"]}</span> */}
-              <span className='rating'>당도 : <Rating cnt={wine["wineSweet"]}/></span>
-              <span className='rating'>바디 : <Rating cnt={wine["wineBody"]}/></span>
+              <span className='rating'>당도 : <Rating cnt={wine["wineSweet"]} /></span>
+              <span className='rating'>바디 : <Rating cnt={wine["wineBody"]} /></span>
               <span>품종 : {wine["wineVariety"]}</span>
             </div>
           </div>
@@ -47,13 +49,11 @@ function CardFlip({ wine }) {
 export default CardFlip;
 
 const CardWrap = styled.div`
-  border-radius: 25px;
-  padding: 0 30px;
   img {
     height: auto;
   }
   .flippy-container {
-    margin: 0 10px;
+    margin: 0 8px;
   }
   .card {
     text-align: center;
@@ -67,15 +67,29 @@ const FrontWrap = styled(FrontSide)`
   align-items: center;
   width: 100%;
   box-shadow: none;
+  border-radius: 10px;
+  background-color: #ffffff;
+  border: 1px solid #595959;
+
+  .wineNameWrap {
+    height: 45px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+  }
+
   .wineName {
     font-weight: bold;
     display: block;
-    text-align: center;
   } 
 `
 
 const BackWrap = styled(BackSide)`
   box-shadow: none;
+  border-radius: 10px;
+    background-color: #ffffff;
+    border: 1px solid #595959;
   .wineInfo {
     position: absolute;
     top: 50%;
