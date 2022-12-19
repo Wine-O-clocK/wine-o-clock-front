@@ -6,7 +6,7 @@ function WinyQuestionComponent({ questionMessage }) {
     <>
       <WinyHelloWrap>
         <WinyImgWrap>
-          <img src="https://ifh.cc/g/ZJJJd6.png" alt="프로필사진" />
+          <img src="https://ifh.cc/g/O4dDbp.png" alt="프로필사진" />
         </WinyImgWrap>
         <WinyBubbleWrap>
           <p>{questionMessage}</p>
@@ -42,6 +42,10 @@ const WinyImgWrap = styled.div`
   margin-right: 5px;
   width: 50px;
   /* float: left; */
+  img {
+    border-radius: 50%;
+    border: 2px solid #ce87d9;
+  }
 `;
 
 const WinyBubbleWrap = styled.div`

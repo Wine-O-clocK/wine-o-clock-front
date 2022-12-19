@@ -5,10 +5,10 @@ import WineAroma from "./WineAroma";
 const wineTestResult = {
   wineCode: "1122",
   wineImage:
-    "https://wine21.speedgabia.com/WINE_MST/TITLE/0158000/W0158106.jpg",
-  wineName: "샤또 샤스 스플린",
-  wineNameEng: "Chateau Chasse Spleen",
-  wineType: "레드",
+    "https://wine21.speedgabia.com/WINE_MST/TITLE/0161000/W0161387.jpg",
+  wineName: "핑크 페고",
+  wineNameEng: "Chateau Pegau Rose Pink Pegau",
+  wineType: "로제",
   wineAlcohol: "12 - 13",
   winePrice: 8,
   wineSweet: 1,
