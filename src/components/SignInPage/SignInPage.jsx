@@ -13,6 +13,7 @@ import OAuthNaver from "./OAuthNaver";
 import OAuthKakao from "./OAuthKakao";
 import OAuthGoogle from "./OAuthGoogle";
 import { PathState } from "../../states/MainState";
+import axios from "axios";
 
 function SignInPage() {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ function SignInPage() {
     name: "임가비",
     id: "abc0000@naver.com",
     pwd: "wine1234*",
-    level: 1,
+    Role: "ROLE_USER",
   };
 
   const [email, setEmail] = useState("");
@@ -67,8 +68,27 @@ function SignInPage() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    // const res = await axios({
+    //   headers: {
+        
+    //   }, 
+    //   method: "post",
+    //   url: "http://172.20.10.11:8080/login",
+    //   data: {
+    //     email: email,
+    //     password: pwd
+    //   }
+    // })
+    // .then((res) => {
+    //   console.log(res)
+    //   alert("로그인 됨")
+    // })
+    // .catch((err) => {
+    //   console.log(err)
+    // })
+
     if (email === user.id && pwd === user.pwd) {
       setUserName(user.name);
       setUserLoginEmail(email);
@@ -76,7 +96,7 @@ function SignInPage() {
       setIsLoggedIn(true);
       navigate("/", {
         state: {
-          userLevel: user.level,
+          userRole: user.Role,
         },
       });
     } else {

@@ -19,6 +19,8 @@ function RecentWine() {
     let endIdx = startIdx + 3;
 
     if (endIdx > recent_wine.length) {
+      // 3개씩 보여주기 위해
+      startIdx = recent_wine.length - 3;
       endIdx = recent_wine.length;
     }
     const wineArr = recent_wine.slice(startIdx, endIdx);

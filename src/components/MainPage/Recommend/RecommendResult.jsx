@@ -1,61 +1,50 @@
-import React from "react";
-import styled from "styled-components";
-import WineAroma from "./WineAroma";
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { recent_wine } from "../../../recent_data";
+import WineAroma from '../../WineTestPage/WineResult/WineAroma';
+import OtherWineInfo from './OtherWineInfo';
 
-const wineTestResult = {
-  wineCode: "1122",
-  wineImage:
-    "https://wine21.speedgabia.com/WINE_MST/TITLE/0158000/W0158106.jpg",
-  wineName: "샤또 샤스 스플린",
-  wineNameEng: "Chateau Chasse Spleen",
-  wineType: "레드",
-  wineAlcohol: "12 - 13",
-  winePrice: 8,
-  wineSweet: 1,
-  wineBody: 4,
-  wineVariety: "블렌디드",
-  aroma1: " ",
-  aroma2: " ",
-  aroma3: " ",
-  wineText:
-    "'슬픔이란 안녕'이라는 뜻의 '샤스 스플린(Chasse Spleen)'은 프랑스 보르도(Bordeaux)의 물리(Moulis) 지역에서 생산한 레드 와인입니다. 프랑스의 유명한 시인 샤를 보들레르(Charles Baudelaire)가 사랑한 와인으로도 잘 알려져 있는데요. 실제로 보들레르는 이 와인을 마시며 슬픔을 달랬다고 해요.",
-};
+function RecommendResult() {
+  const wine = recent_wine.slice(0, 10)
+  const [idxArr, setIdxArr] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+  //const [mainWine, setMainWine] = useState([]);
+  const [otherWine, setOtherWine] = useState([]);
 
-function RecommendWineInfo() {
+  const shuffleArr = (arr) => {
+    return arr.sort(() => 0.5 - Math.random());
+  }
+
+  useEffect(() => {
+    let arrIdx = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    let tmpWine = wine;
+    shuffleArr(arrIdx);
+    setIdxArr(arrIdx)
+    //setMainWine(wine[arrIdx[0]]);
+    tmpWine.splice(arrIdx[0], 1);
+    setOtherWine(tmpWine)
+  } ,[])
+
   let wineTypeEng = "";
-  if (wineTestResult.wineType === "레드") {
+  if (wine[idxArr[0]]["wineType"] === "레드") {
     wineTypeEng = "red";
-  } else if (wineTestResult.wineType === "화이트") {
+  } else if (wine[idxArr[0]]["wineType"] === "화이트") {
     wineTypeEng = "white";
-  } else if (wineTestResult.wineType === "로제") {
+  } else if (wine[idxArr[0]]["wineType"] === "로제") {
     wineTypeEng = "rose";
   } else {
     wineTypeEng = "sparkling";
   }
-  const wineAroma = [
-    wineTestResult.aroma1,
-    wineTestResult.aroma2,
-    wineTestResult.aroma3,
-  ];
 
   return (
     <>
       <WineResultInfoWrap>
         <p>당신을 위한 오늘의 와인은 ..</p>
-        <WineNameWrap>" {wineTestResult.wineName} "</WineNameWrap>
+        <WineNameWrap>" {wine[idxArr[0]].wineName} "</WineNameWrap>
         <WineImgWrap>
-          <img src={wineTestResult.wineImage} alt="aaa" />
+          <img src={wine[idxArr[0]].wineImage} alt="wineImg" />
         </WineImgWrap>
         <WineInfoWrap>
-          <span className={wineTypeEng}>{wineTestResult.wineType}</span>
-          <span className="wineAlcohol">
-            도수 : {wineTestResult.wineAlcohol}
-          </span>
-          <p className="wineAroma">
-            {wineAroma.map((aroma, idx) => (
-              <WineAroma key={idx} aroma={aroma} />
-            ))}
-          </p>
+          <span className={wineTypeEng}>{wine[idxArr[0]].wineType}</span>
         </WineInfoWrap>
         <WineTxtWrap>
           추천받은 와인은 <br />
@@ -63,13 +52,20 @@ function RecommendWineInfo() {
           확인하실 수 있습니다.
         </WineTxtWrap>
       </WineResultInfoWrap>
+      <OtherWineWrap>
+        <OtherWineInfo wine={otherWine}/>
+      </OtherWineWrap>
     </>
   );
 }
 
 const WineResultInfoWrap = styled.div`
-  padding: 10px;
   text-align: center;
+  background-color: #f5f5f5;
+  border-radius: 15px;
+  margin: 0 22px;
+  padding: 20px 0;
+  box-shadow: 0px 8px 10px 0 rgb(0, 0, 0, 0.2);
 `;
 
 const WineNameWrap = styled.div`
@@ -120,7 +116,7 @@ const WineInfoWrap = styled.div`
     color: #000000;
     background-color: #fffcbb;
   }
-  .wineAlcohol {
+  .winePrice {
     color: #000000;
     background-color: #ffffff;
   }
@@ -133,4 +129,8 @@ const WineTxtWrap = styled.div`
   padding: 10px 20px;
 `;
 
-export default RecommendWineInfo;
+const OtherWineWrap = styled.div`
+  
+`
+
+export default RecommendResult;

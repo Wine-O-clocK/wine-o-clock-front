@@ -1,5 +1,6 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { PathState } from "../../states/MainState";
@@ -7,6 +8,7 @@ import AromaType from "./AromaType";
 import WineType from "./WineType";
 
 function SignUpDetailPage() {
+  const navigate = useNavigate();
   const location = useLocation();
   const setPathState = useSetRecoilState(PathState);
   useEffect(() => {
@@ -76,8 +78,9 @@ function SignUpDetailPage() {
       ? true
       : false;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     const userInfo = {
       email: location.state.email,
       password: location.state.pwd,
@@ -91,6 +94,29 @@ function SignUpDetailPage() {
       userLikeAroma3: checkedAroma[2],
     };
     console.log(userInfo);
+
+    const res = await axios({
+      headers: {},
+      method: "post",
+      url: "http://192.168.20.92:8080/join",
+      data: {
+        email: location.state.email,
+        password: location.state.pwd,
+        userName: userName,
+        birthday: userBirth,
+        userLikeType: checkedItems,
+        userLikeSweet: sweetRes,
+        userLikeBody: bodyRes,
+        userLikeAroma1: checkedAroma[0],
+        userLikeAroma2: checkedAroma[1],
+        userLikeAroma3: checkedAroma[2],
+      }
+    })
+    .then((res) => {
+      alert("회원가입이 완료되었습니다.");
+      navigate("/");
+    })
+    .catch((err) => console.log(err))
   };
 
   return (

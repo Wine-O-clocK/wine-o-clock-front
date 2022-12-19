@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { AiFillHome, AiOutlineReload } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import Spinner from "../../assets/img/spinner.gif";
-import RecommendWineInfo from "./RecommendWineInfo";
+import Spinner from "../../../assets/img/spinner.gif";
 import { useRecoilState } from "recoil";
-import { wineLoadingState } from "../../states/MainState";
+import { wineLoadingState } from "../../../states/MainState";
+import RecommendResult from "./RecommendResult";
 
 function WineRecommendPage() {
   const navigate = useNavigate();
@@ -19,9 +19,7 @@ function WineRecommendPage() {
       <WineRecommendWrap>
         {wineLoading ? (
           <>
-            <ResultBoxWrap>
-              <RecommendWineInfo />
-            </ResultBoxWrap>
+            <RecommendResult/>
             <ButtonWrap>
               <button
                 onClick={() => {
@@ -56,7 +54,6 @@ function WineRecommendPage() {
 const WineRecommendWrap = styled.div`
   /* background-color: #c371ea; */
   background: linear-gradient(to bottom, #f8e49d, #ffa83d);
-  height: 120vh;
   padding: 0;
   padding-top: 30px;
   padding-bottom: 50px;
@@ -103,7 +100,7 @@ const ButtonWrap = styled.div`
     padding: 16px 100px;
     background-color: #ffe6b5;
     border: 2px solid #ffe6b5;
-    margin-top: 15px;
+    margin: 15px auto;
   }
 `;
 
