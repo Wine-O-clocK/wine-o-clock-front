@@ -36,7 +36,7 @@ function KakaoShare({ _title, _sub, _imageUrl, _finalType }) {
         <ShareTitle>친구에게 결과 공유하기 🔗</ShareTitle>
         <ShareBtns>
           <KakaoBtn value="Kakao" onClick={onHandleShareKakao}>
-            <img src={socialKakao} alt="kakao" />
+            <img src={socialKakao} alt="카카오톡으로 공유하기" />
           </KakaoBtn>
           <CopyToClipboard text={link} className="CopyBtn">
             <button>

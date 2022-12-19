@@ -5,6 +5,7 @@ import Header from "./components/Header/Header";
 import MainPage from "./components/MainPage/MainPage";
 import WineRecommendPage from "./components/MainPage/Recommend/WineRecommendPage";
 import MyPage from "./components/Mypage/MyPage";
+import UserInfoEdit from "./components/Mypage/UserInfoEdit";
 import Navigation from "./components/Navigation/Navigation";
 import SearchResult from "./components/SearchPage/SearchResult";
 import WineTestPage from "./components/WineTestPage/WineTestPage";
@@ -27,9 +28,10 @@ function App() {
         <Route path="/signup/detail" element={<SignUpDetail />} />
         <Route path="/winerecommendpage" element={<WineRecommendPage />} />
         <Route path="/search" element={<Search />} />
-        <Route path="/searchresult" element={<SearchResult/>}/>
+        <Route path="/searchresult" element={<SearchResult />} />
         <Route path="/winetestpage" element={<WineTestPage />} />
         <Route path="/mypage" element={<MyPage />} />
+        <Route path="/mypage/userinfo" element={<UserInfoEdit />} />
         <Route path="/*" element={<NotFound />} />
       </Routes>
       <Navigation />

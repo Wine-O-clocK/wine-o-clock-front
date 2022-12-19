@@ -36,9 +36,11 @@ function UserInfoComponent() {
         </UserImgWrap>
         <UserTxtWrap>
           <h3>{loginUserName}님</h3>
-          <h4>회원정보 수정</h4>
+          <h4 onClick={() => navigate("/mypage/userinfo")}>회원정보 수정</h4>
         </UserTxtWrap>
-        <button className="logout" onClick={handleLogout}>로그아웃</button>
+        <button className="logout" onClick={handleLogout}>
+          로그아웃
+        </button>
       </UserInfoWrap>
     </>
   );
@@ -57,7 +59,7 @@ const UserInfoWrap = styled.div`
     border: 1px solid #ececec;
     background-color: #ececec;
     padding: 6px 12px;
-    font-family: 'AppleBold';
+    font-family: "AppleBold";
     color: #000000;
   }
 `;

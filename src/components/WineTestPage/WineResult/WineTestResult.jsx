@@ -74,7 +74,7 @@ function WineTestResult() {
 const WineTestResultWrap = styled.div`
   /* background-color: #c371ea; */
   background: linear-gradient(to bottom, #c77aea, #b255dd);
-  height: 140vh;
+  /* height: 140vh; */
   padding: 0;
   padding-top: 30px;
   padding-bottom: 50px;
@@ -94,10 +94,10 @@ const ShareWrap = styled.div`
   background-color: #ffffff;
   border-radius: 10px;
   /* border: 6px solid #8d8d8d; */
-  margin: 0 80px;
+  margin: 0 30px;
   margin-top: 35px;
   /* height: 500px; */
-  padding: 4px;
+  padding: 6px;
   box-shadow: 0px 8px 10px 0 rgb(0, 0, 0, 0.2);
 `;
 
