@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styled from "styled-components";
@@ -25,14 +24,6 @@ function MainPage() {
     { title: "접근성 좋은 와인 TOP5", value: "access" },
     { title: "가성비 좋은 와인 TOP5", value: "price" },
   ];
-
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
 
   const userAccessToken = () => {
     loginSocial && getToken();
@@ -69,11 +60,15 @@ function MainPage() {
           return (
             <div key={idx}>
               <p className="title">{c.title}</p>
-              <SlideWrapper {...settings}>
+              <WineInfoWrap>
                 {wine[key].map((w, idx) => (
-                  <CardFlip key={idx} className="card" wine={w} />
+                  <>
+                    <WineInfo>
+                      <CardFlip key={idx} className="card" wine={w} />
+                    </WineInfo>
+                  </>
                 ))}
-              </SlideWrapper>
+              </WineInfoWrap>
             </div>
           );
         })}
@@ -95,29 +90,32 @@ const SlideContainer = styled.div`
   padding-bottom: 100px;
 
   .title {
-    margin-top: 40px;
     padding-top: 22px;
     font-weight: bold;
   }
 `;
 
-const SlideWrapper = styled(Slider)`
-  position: relative;
+const WineInfoWrap = styled.div`
   display: flex;
   flex-direction: row;
-  border-radius: 25px;
-  transition: transform 0.5s;
-  box-shadow: 8px 10px 10px 0 rgba(0, 0, 0, 0.2);
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 
-  .card {
-    background-color: #ffffff;
+  ::-webkit-scrollbar {
+    display: none;
   }
-  .slick-prev::before,
-  .slick-next::before {
-    content: "";
+  .wineName {
+    font-family: 'AppleBold';
   }
-  .slick-dots {
-    position: absolute;
-    bottom: -35px;
+`;
+
+const WineInfo = styled.div`
+  img {
+    width: auto;
+    height: auto;
+    max-width: 30vw;
   }
 `;

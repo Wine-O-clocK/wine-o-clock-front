@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { PathState } from "../../states/MainState";
@@ -9,6 +9,7 @@ import AromaType from "../SignUpPage/AromaType";
 import * as Styled from "../styles/input.style";
 
 function SearchPage() {
+  const navigate = useNavigate();
   const location = useLocation();
   const setPathState = useSetRecoilState(PathState);
   useEffect(() => {
@@ -55,6 +56,7 @@ function SearchPage() {
     { type: "베리", value: "berry" },
     { type: "허브", value: "herb" },
   ];
+
   const checkedAromaHandler = (item, isChecked) => {
     if (isChecked) {
       setSelectedAroma([...selectedAroma, item]);
@@ -77,7 +79,8 @@ function SearchPage() {
       price: selectedPrice,
       aroma: selectedAroma,
     };
-    console.log(filtering);
+    console.log(filtering)
+    navigate('/searchresult');
   };
 
   return (

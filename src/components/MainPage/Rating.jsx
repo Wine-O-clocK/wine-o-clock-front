@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { BsCircleFill, BsCircle } from 'react-icons/bs';
+
 function Rating({ cnt }) {
   let arr = Array.from({ length: 5 }, () => 0);
   for (let i = 0; i < cnt; i++) {

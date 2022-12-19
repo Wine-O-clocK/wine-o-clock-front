@@ -7,10 +7,10 @@ import { LoginState, LoginUserName } from "../../states/LoginState";
 function LoginPermission() {
   const location = useLocation();
   const navigate = useNavigate();
-  const [userLevel, setUserLevel] = useState(-1);
+  const [userRole, setUserRole] = useState("");
   useEffect(() => {
     if (location.state !== null) {
-      setUserLevel(location.state.userLevel);
+      setUserRole(location.state.userRole);
     }
   }, []);
 
@@ -20,7 +20,7 @@ function LoginPermission() {
   return (
     <LoginWrapper>
       {isLoggedIn ? (
-        userLevel === 0 ? (
+        userRole === "ROLE_SOCIAL" ? (
           <>
             <div>
               <span>{loginUserName}</span>님의 취향 저격 와인
