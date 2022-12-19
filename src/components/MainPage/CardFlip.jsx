@@ -4,15 +4,13 @@ import Flippy, { FrontSide, BackSide } from 'react-flippy';
 import Rating from './Rating';
 
 function CardFlip({ wine }) {
-  const wineInfo = {
-    wineImage: wine[0],
-    wineName: wine[1],
-    wineNameEng: wine[2],
-    wineType: wine[3],
-    wineSweet: wine[6],
-    wineBody: wine[7],
-    wineVariety: wine[8]
+  const wineTypeEng = (wineType) => {
+    if (wineType === '스파클링') return 'sparkling'
+    else if (wineType === '레드') return 'red'
+    else if (wineType === '화이트') return 'white'
+    else if (wineType === '로제') return 'rose'
   }
+  const wineType = wine['wineType'];
 
   return (
     <CardWrap>
@@ -24,19 +22,22 @@ function CardFlip({ wine }) {
       >
         <FrontWrap>
           <div className='card'>
-            <img src={wineInfo.wineImage} />
-            <span className='wineName'>{wineInfo.wineName}</span>
+            <img src={wine["wineImage"]} />
+            <div className='wineNameWrap'>
+              <span className='wineName'>{wine["wineName"]}</span>
+            </div>
           </div>
         </FrontWrap>
         <BackWrap>
           <div className='card'>
             <div className='wineInfo'>
-              <span className='wineNameEng'>{wineInfo.wineNameEng}</span>
-              <span>{wineInfo.wineName}</span>
-              <span>{wineInfo.wineType}</span>
-              <span className='rating'>당도 : <Rating cnt={wineInfo.wineSweet}/></span>
-              <span className='rating'>바디 : <Rating cnt={wineInfo.wineBody}/></span>
-              <span>품종 : {wineInfo.wineVariety}</span>
+              <span className='wineNameEng'>{wine["wineNameEng"]}</span>
+              <span>{wine["wineName"]}</span>
+              <span>{wine["wineType"]}</span>
+              {/* <span className={wineTypeEng(wineType)}>{wine["wineType"]}</span> */}
+              <span className='rating'>당도 : <Rating cnt={wine["wineSweet"]} /></span>
+              <span className='rating'>바디 : <Rating cnt={wine["wineBody"]} /></span>
+              <span>품종 : {wine["wineVariety"]}</span>
             </div>
           </div>
         </BackWrap>
@@ -48,13 +49,11 @@ function CardFlip({ wine }) {
 export default CardFlip;
 
 const CardWrap = styled.div`
-  border-radius: 25px;
-  padding: 0 30px;
   img {
     height: auto;
   }
   .flippy-container {
-    margin: 0 10px;
+    margin: 0 8px;
   }
   .card {
     text-align: center;
@@ -68,15 +67,29 @@ const FrontWrap = styled(FrontSide)`
   align-items: center;
   width: 100%;
   box-shadow: none;
+  border-radius: 10px;
+  background-color: #ffffff;
+  border: 1px solid #595959;
+
+  .wineNameWrap {
+    height: 45px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+  }
+
   .wineName {
     font-weight: bold;
     display: block;
-    text-align: center;
   } 
 `
 
 const BackWrap = styled(BackSide)`
   box-shadow: none;
+  border-radius: 10px;
+    background-color: #ffffff;
+    border: 1px solid #595959;
   .wineInfo {
     position: absolute;
     top: 50%;
@@ -89,6 +102,30 @@ const BackWrap = styled(BackSide)`
     }
     .wineNameEng {
       font-style: italic;
+    }
+    .red {
+      border-radius: 5px;
+      padding: 8px 16px;
+      color: #ffffff;
+      background-color: #ba0e30;
+    }
+    .white {
+      border-radius: 5px;
+      padding: 8px 16px;
+      color: #ffffff;
+      background-color: #808ee8;
+    }
+    .rose {
+      border-radius: 5px;
+      padding: 8px 16px;
+      color: #ffffff;
+      background-color: #fa8c8c;
+    }
+    .sparkling {
+      border-radius: 5px;
+      padding: 8px 16px;
+      color: #000000;
+      background-color: #fffcbb;
     }
     .rating {
       width: fit-content;

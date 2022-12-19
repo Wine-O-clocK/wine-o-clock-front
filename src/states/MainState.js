@@ -7,6 +7,6 @@ export const PathState = atom({
 });
 
 export const wineLoadingState = atom({
-  key: "wineLoadingState/${uuidv4()}",
+  key: `wineLoadingState/${uuidv4()}`,
   default: 0,
 });
