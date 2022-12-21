@@ -34,9 +34,8 @@ function CardFlip({ wine }) {
               <span className='wineNameEng'>{wine["wineNameEng"]}</span>
               <span>{wine["wineName"]}</span>
               <span>{wine["wineType"]}</span>
-              {/* <span className={wineTypeEng(wineType)}>{wine["wineType"]}</span> */}
-              <span className='rating'>당도 : <Rating cnt={wine["wineSweet"]} /></span>
-              <span className='rating'>바디 : <Rating cnt={wine["wineBody"]} /></span>
+              <span className='rating'>당도 : <Rating cnt={wine["wineSweet"]} wineType={wineTypeEng(wine.wineType)}/></span>
+              <span className='rating'>바디 : <Rating cnt={wine["wineBody"]} wineType={wineTypeEng(wine.wineType)}/></span>
               <span>품종 : {wine["wineVariety"]}</span>
             </div>
           </div>
@@ -53,7 +52,7 @@ const CardWrap = styled.div`
     height: auto;
   }
   .flippy-container {
-    margin: 0 8px;
+    margin: 20px 8px;
   }
   .card {
     text-align: center;
@@ -78,7 +77,6 @@ const FrontWrap = styled(FrontSide)`
     text-align: center;
     justify-content: center;
   }
-
   .wineName {
     font-weight: bold;
     display: block;
@@ -88,8 +86,8 @@ const FrontWrap = styled(FrontSide)`
 const BackWrap = styled(BackSide)`
   box-shadow: none;
   border-radius: 10px;
-    background-color: #ffffff;
-    border: 1px solid #595959;
+  background-color: #ffffff;
+  border: 1px solid #595959;
   .wineInfo {
     position: absolute;
     top: 50%;
@@ -98,34 +96,11 @@ const BackWrap = styled(BackSide)`
     width: 100%;
     span {
       display: block;
-      margin: 16px;
+      margin: 8px;
+      font-size: 15px;
     }
     .wineNameEng {
       font-style: italic;
-    }
-    .red {
-      border-radius: 5px;
-      padding: 8px 16px;
-      color: #ffffff;
-      background-color: #ba0e30;
-    }
-    .white {
-      border-radius: 5px;
-      padding: 8px 16px;
-      color: #ffffff;
-      background-color: #808ee8;
-    }
-    .rose {
-      border-radius: 5px;
-      padding: 8px 16px;
-      color: #ffffff;
-      background-color: #fa8c8c;
-    }
-    .sparkling {
-      border-radius: 5px;
-      padding: 8px 16px;
-      color: #000000;
-      background-color: #fffcbb;
     }
     .rating {
       width: fit-content;
