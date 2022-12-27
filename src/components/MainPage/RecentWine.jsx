@@ -10,7 +10,7 @@ function RecentWine() {
   const [currIdx, setCurrIdx] = useState(0);
 
   useEffect(() => {
-    const wineArr = recent_wine.slice(0, 3);
+    const wineArr = recent_wine.sort(() => Math.random() - 0.5).slice(0, 3);
     setCurrWine(wineArr);
   }, []);
 
@@ -75,11 +75,10 @@ const RecentWineContainer = styled.div`
     align-items: center;
     justify-content: space-between;
     padding-right: 16px;
-
     .title {
       padding-top: 2px;
       font-weight: bold;
-      margin-top: 24px;
+      margin: auto 0;
     }
     .renderBtn {
       cursor: pointer;

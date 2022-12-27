@@ -51,9 +51,11 @@ function MainPage() {
 
   return (
     <MainContainer>
-      <LoginPermission />
-      <SpecialWine />
-      <RecentWine />
+      <div className="topContainer">
+        <LoginPermission />
+        <SpecialWine />
+        <RecentWine />
+      </div>
       <SlideContainer>
         {category.map((c, idx) => {
           const key = c.value;
@@ -80,17 +82,20 @@ function MainPage() {
 export default MainPage;
 
 const MainContainer = styled.div`
-  margin: 0 24px;
   span {
     font-weight: bold;
+  }
+  .topContainer {
+    margin: 0 24px;
   }
 `;
 
 const SlideContainer = styled.div`
   padding-bottom: 100px;
-
+  margin: 0 0 0 8px;
   .title {
-    padding-top: 22px;
+    padding-top: 8px;
+    margin: 8px 0 0 8px;
     font-weight: bold;
   }
 `;

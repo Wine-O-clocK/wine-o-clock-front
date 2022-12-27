@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { special_wine } from "../../special_data";
+import { MdRefresh } from "react-icons/md";
 
 function SpecialWine() {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ function SpecialWine() {
     12: "크리스마스",
   };
   const [wineArr, setWineArr] = useState([]);
+  const [click, setClick] = useState(false);
   let wineIdxArr = [];
 
   useEffect(() => {
@@ -26,7 +28,11 @@ function SpecialWine() {
       wineIdxArr = Array.from(new Set(wineIdxArr));
     }
     setWineArr(wineIdxArr);
-  }, []);
+  }, [click]);
+
+  const onClickRefresh = () => {
+    setClick(prev => !prev);
+  };
 
   const onClickSpecialWine = (wine) => {
     navigate(`/wine/${wine["wineNameEng"]}`, {
@@ -36,7 +42,14 @@ function SpecialWine() {
 
   return (
     <SpecialWineContainer>
-      <div className="title">{special[month]} 스페셜 와인</div>
+      <div className="specialWineTop">
+        <div className="title">{special[month]} 스페셜 와인</div>
+        <MdRefresh
+          className="renderBtn"
+          size="20"
+          onClick={onClickRefresh}
+        />
+      </div>
       <div className="specialWineMain">
         {wineArr.map((wineIdx, idx) => (
           <div
@@ -56,22 +69,29 @@ function SpecialWine() {
 export default SpecialWine;
 
 const SpecialWineContainer = styled.div`
-  .title {
-    padding-top: 2px;
-    margin-top: 28px;
-    font-weight: bold;
+  padding: 16px 0;
+  .specialWineTop {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 16px;
+    margin-top: 24px;
+    .title {
+      padding-top: 2px;
+      font-weight: bold;
+      margin: auto 0;
+    }
+    .renderBtn {
+      cursor: pointer;
+    }
   }
   .specialWineMain {
     margin: 0;
     margin-top: 16px;
     display: flex;
     flex-direction: row;
-
-    /* margin-right: 16px; */
-    /* padding: 8px;
-    box-shadow: 0 0 0 4px #dc3f3f;
-    outline: dashed 6px green;
-    border-radius: 10px; */
     .wine {
       display: flex;
       flex-direction: column;
