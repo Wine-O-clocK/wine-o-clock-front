@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { AiFillHome, AiOutlineReload } from "react-icons/ai";
+import { debounce } from "lodash";
 import styled from "styled-components";
 import {
   answerFirstState,
@@ -20,6 +21,8 @@ import WinyHelloComponent from "./Winy/WinyHelloComponent";
 import WinyQuestionComponent from "./Winy/WinyQuestionComponent";
 import WinyByeComponent from "./Winy/WinyByeComponent";
 import { wine_test_data } from "../../../wine_test_data";
+import { useRef } from "react";
+import { useCallback } from "react";
 
 function TestMainComponent() {
   const [nowBubbleNum, setNowBubbleNum] = useRecoilState(nowBubbleState);
@@ -41,6 +44,32 @@ function TestMainComponent() {
   const setWineTestResult = useSetRecoilState(wineTestResultState);
 
   const navigate = useNavigate();
+
+  const scrollRef = useRef();
+  const boxRef = useRef(null);
+  const [scrollState, setScrollState] = useState(true);
+
+  const scrollEvent = debounce(() => {
+    const scrollTop = boxRef.current.scrollTop; // 스크롤 위치
+    const clientHeight = boxRef.current.clientHeight; // 요소의 높이
+    const scrollHeight = boxRef.current.scrollHeight; // 스크롤의 높이
+
+    setScrollState(
+      scrollTop + clientHeight >= scrollHeight - 100 ? true : false
+    );
+  }, 100);
+
+  const scroll = useCallback(scrollEvent, []);
+
+  useEffect(() => {
+    if (scrollState) {
+      scrollRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [nowBubbleNum]);
+
+  useEffect(() => {
+    boxRef.current.addEventListener("scroll", scroll);
+  });
 
   const onClickResetState = () => {
     setNowBubbleNum(0);
@@ -121,7 +150,8 @@ function TestMainComponent() {
   });
   return (
     <>
-      <TestMainWrap>
+      <TestMainWrap ref={boxRef}>
+        <div ref={scrollRef} />
         {nowBubbleNum >= 0 && (
           <>
             <WinyHelloComponent />
@@ -196,8 +226,8 @@ const TestMainWrap = styled.div`
   padding-top: 8px;
   width: 100%;
   /* height: 625px; */
-  height: calc(var(--vh, 1vh) * 100);
-  /* margin-bottom: 100px; */
+  /* height: calc(var(--vh, 1vh) * 100); */
+  margin-bottom: 100px;
   overflow: auto;
 
   button {
